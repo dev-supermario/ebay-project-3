@@ -1,11 +1,11 @@
 import express from "express"
 import axios from "axios"
-import { OAuthToken } from "../utils/ebay_oauth_token";
-const router = express.Router()
+import { OAuthToken } from "../middleware/ebay_oauth_token";
+import { categoryMap } from "../middleware/extra"
 
+const router = express.Router()
 const client_id = process.env.API_APPID;
 const client_secret = process.env.API_CERTID;
-
 const oauthToken = new OAuthToken(client_id, client_secret);
 
 
@@ -21,6 +21,7 @@ router.get('/getItems',(req,res)=>{
     const itemUnspecified = req.query.itemUnspecified
     const freeShipping = req.query.freeShipping
     const localPickup = req.query.localPickup
+    const category = req.query.category
 
     let itemFilterCount = 0
 
@@ -30,7 +31,11 @@ router.get('/getItems',(req,res)=>{
     if(keyword) URL += `&keywords=${keyword}`
     if(buyerZipcode) URL += `&buyerPostalCode=${buyerZipcode}`
 
-    // ITEM CATEGORY ??????
+    // Category
+
+    if(category && category!="allCategories"){
+        URL += `&categoryId=${categoryMap[category]}`
+    }
 
     // max distance
 

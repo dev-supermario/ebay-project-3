@@ -23,7 +23,7 @@ router.get("/getZipcodes",(req,res)=>{
 
 router.get("/getPhotos",(req,res)=>{
     const keyword = req.query.keyword
-    let URL = `https://www.googleapis.com/customsearch/v1?q=${keyword}&cx=${process.env.GOOGLE_SEARCH_ENGINE_ID}&imgSize=huge&imgType=news&num=8&searchType=image&key=${process.env.GOOGLE_API_KEY}`
+    let URL = `https://www.googleapis.com/customsearch/v1?cx=${process.env.GOOGLE_SEARCH_ENGINE_ID}&key=${process.env.GOOGLE_API_KEY}&imgSize=huge&imgType=photo&num=8&searchType=image&q=${keyword}`
 
     const config = {
         headers: {
@@ -31,6 +31,7 @@ router.get("/getPhotos",(req,res)=>{
         }
     }
 
+    console.log(URL)
     axios.get(URL,config)
     .then(res => res.data)
     .then(data => res.status(200).send(data))
