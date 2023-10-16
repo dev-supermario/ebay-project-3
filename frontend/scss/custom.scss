@@ -1,0 +1,15 @@
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/mixins';
+
+$spacer : 1px;
+
+@for $i from 1 through 500 {
+    $spacers: map-merge($spacers, (
+    $i: ($i * $spacer)
+    ));
+  }
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+
