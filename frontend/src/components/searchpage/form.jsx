@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import ButtonGroup from './buttongroup';
-import { handleSearchClick } from '../../fetch';
+import { handleSearchClick } from '../../utils/fetch';
+import { LocationGroup } from './location';
 
 
 
-export default function Form(){
+export default function Form({ setSearched }){
 
     const [keyword,setKeyword] = useState("")
     const [categoryOptions,setCategoryOptions] = useState("AllCategories")
@@ -14,9 +15,9 @@ export default function Form(){
     const [localPickup,setLocalPickup] = useState(false)
     const [freeShipping,setFreeShipping] = useState(false)
     const [distance,setDistance]  = useState("10")
-    const [currentLocation,setCurrentLocation] = useState(false)
-    const [zipcodeRadio,setZipcodeRadio] = useState(false)
+    const [currentLocationOrManual,setCurrentLocationOrManual] = useState(true)
     const [zipcodeText,setZipcodeText] = useState("")
+    const [zipcodeInput,setZipcodeInput] = useState("")
 
 
     const handleClearClick = ()=>{
@@ -28,9 +29,8 @@ export default function Form(){
         setLocalPickup(false)
         setFreeShipping(false)
         setDistance("10")
-        setCurrentLocation(false)
-        setZipcodeRadio(false)
-        setZipcodeText("")
+        setCurrentLocationOrManual(true)
+        setZipcodeInput("")
     }
 
 
@@ -38,8 +38,9 @@ export default function Form(){
         <>
             <div className="row gy-20 pb-15 px-30 px-sm-300">
                 <div className="col-12 d-sm-flex">
-                    <label className="form-label col-sm-4">Keyword<span className="text-danger">*</span></label>
-                    <input 
+                    <label className="form-label col-sm-4">Keyword<span className="text-danger" htmlFor="keyword">*</span></label>
+                    <input
+                        id='keyword' 
                         className="form-control" 
                         placeholder="Enter Product Name (eg. Iphone 8)" 
                         type="text" 
@@ -48,9 +49,11 @@ export default function Form(){
                     />
                 </div>
                 <div className="col-12 d-sm-flex">
-                    <label className="form-label col-sm-4">Category</label>
+                    <label className="form-label col-sm-4" htmlFor='category'>Category</label>
                     <div className="col-sm-3">
-                        <select className="form-select"
+                        <select
+                            id='category' 
+                            className="form-select"
                             value={categoryOptions}
                             onChange={(e)=>setCategoryOptions(e.target.value)}
                         >
@@ -127,44 +130,30 @@ export default function Form(){
                         />
                     </div>
                 </div>
-                <div className="col-12 d-sm-flex">
-                    <label className="form-label col-sm-4">From<span className="text-danger">*</span></label>
-                    <div className='col-sm-8'>
-                        <div>
-                            <input className="form-check-radio" 
-                                type="radio"
-                                value={currentLocation}
-                                checked={currentLocation && !zipcodeRadio}
-                                onChange={(e)=>{
-                                    setCurrentLocation(e.target.value)
-                                    setZipcodeRadio(false)
-                                }}
-                            />
-                            <label className="form-check-label ms-5" >&lsquo;Current Location&rsquo;</label>
-                        </div>
-                        <div>
-                            <input className="form-check-radio" 
-                                type="radio"
-                                value={zipcodeRadio}
-                                checked={!currentLocation && zipcodeRadio}
-                                onChange={(e)=>{
-                                    setZipcodeRadio(e.target.value)
-                                    setCurrentLocation(false)
-                                }}
-                            />
-                            <label className="form-check-label ms-5" >Other. Please specify zip code:</label>
-                        </div>
-                        <input className="form-control mt-10" 
-                            type="text" 
-                            disabled={!zipcodeRadio} 
-                            value={zipcodeText}
-                            onChange={(e)=>setZipcodeText(e.target.value)}
-                        />
-                    </div>
-                </div>
+                <LocationGroup
+                    currentLocationOrManual={currentLocationOrManual}
+                    setCurrentLocationOrManual={setCurrentLocationOrManual} 
+                    zipcodeText={zipcodeText}
+                    setZipcodeText={setZipcodeText}
+                    zipcodeInput={zipcodeInput}
+                    setZipcodeInput={setZipcodeInput}
+                />
                 <ButtonGroup 
-                    handleClearClick={handleClearClick} 
-                    handleSearchClick={handleSearchClick}
+                    handleClearClick={handleClearClick}
+                    setSearched={setSearched} 
+                    handleSearchClick={handleSearchClick(
+                        {
+                            keyword,
+                            categoryOptions,
+                            conditionNew,
+                            conditionUsed,
+                            conditionUnspecified,
+                            localPickup,
+                            freeShipping,
+                            distance,
+                            zipcodeText
+                        }
+                    )}
                 />
             </div>
         </>

@@ -1,0 +1,35 @@
+.item-index {
+    min-width: 40px;
+    max-width: 40px;
+}
+
+@include media-breakpoint-up(sm) {
+.item-index{
+        min-width: 40px;
+        max-width: 40px;
+    }
+}
+
+.item-img {
+    min-width: 40px;
+    max-width: 40px;
+}
+
+@include media-breakpoint-up(sm) {
+.item-img{
+        min-width: 40px;
+        max-width: 40px;
+    }
+}
+
+.item-title {
+    min-width: 40px;
+    max-width: 40px;
+}
+
+@include media-breakpoint-up(sm) {
+.item-title{
+        min-width: 40px;
+        max-width: 40px;
+    }
+}
