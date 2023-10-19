@@ -1,7 +1,7 @@
 import express from "express"
 import axios from "axios"
-import { OAuthToken } from "../middleware/ebay_oauth_token";
-import { categoryMap } from "../middleware/extra"
+import { OAuthToken } from "../utils/ebay_oauth_token";
+import { categoryMap } from "../utils/extra"
 
 const router = express.Router()
 const client_id = process.env.API_APPID;

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import ButtonGroup from './buttongroup';
-import { handleSearchClick } from '../../utils/fetch';
 import { LocationGroup } from './location';
+import { handleSearchClick } from '../../utils/requests';
+
 
 
 

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { fetchIp } from "../../utils/fetch"
+import { fetchIp } from "../../utils/requests"
 
 
 export const LocationGroup = (props) => {

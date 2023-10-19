@@ -1,19 +1,18 @@
 import { useContext } from "react"
 import { AppContext } from "../../utils/context"
-import { Item } from "./item"
+import { Item } from "./favourite"
 import { NoResults } from "../extras/noresults"
 
-export const ItemList = ()=>{
+export const FavouritesList = ()=>{
 
     const context = useContext(AppContext)
     // const count = resultContext.data["@count"]
-    const items = context.search.results.item
-
+    const favourites = context.favourites.data
 
     return(
         <>
            {
-            items ?
+            favourites ?
             <>
                 <div className="bg-dark text-white w-100 overflow-auto text-nowrap">
                     <div className="d-flex fw-bold pt-10 w-100">
@@ -27,22 +26,20 @@ export const ItemList = ()=>{
                         <p  className="ps-10 me-sm-100"
                             style={{minWidth:"400px"}}
                         >Title</p>
-                        <p className="ps-20 me-sm-50" style={{minWidth:"90px",maxWidth:"90px"}}>Price</p>
-                        <p className="me-sm-40" style={{minWidth:"130px",maxWidth:"130px"}}>Shipping</p>
-                        <p className="me-sm-30" style={{minWidth:"70px",maxWidth:"70px"}}>Zip</p>
-                        <p className="ps-10" style={{minWidth:"80px",maxWidth:"80px"}}>Wish List</p>
+                        <p className="ps-20 me-sm-80" style={{minWidth:"90px",maxWidth:"90px"}}>Price</p>
+                        <p className="me-sm-80" style={{minWidth:"130px",maxWidth:"130px"}}>Shipping Option</p>
+                        <p className="ps-10" style={{minWidth:"80px",maxWidth:"80px"}}>Favourite</p>
                     </div>
                     {
-                        items.map((item,index) => 
+                        favourites.map((item,index) => 
                         <Item 
                             key={index.toString()}
-                            id = {item.itemId} 
+                            id = {item.id} 
                             index = {index+1}
                             title = {item.title}
-                            imageURL = {item.galleryURL}
-                            price = {item.sellingStatus[0].currentPrice[0]["__value__"]}
-                            shipping={item.shippingInfo[0].shippingType}
-                            zipcode = {item.postalCode} 
+                            imageURL = {item.imageURL}
+                            price = {item.price}
+                            shipping={item.shipping}
                         />)
                     }
                 </div>

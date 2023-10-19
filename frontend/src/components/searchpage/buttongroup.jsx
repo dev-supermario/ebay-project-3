@@ -1,12 +1,12 @@
 import SearchIcon from '@mui/icons-material/Search';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import { useContext } from 'react';
-import { ResultsContext } from '../../utils/context';
+import { AppContext } from '../../utils/context';
 
 
 export default function ButtonGroup(props){
 
-    const resultsContext = useContext(ResultsContext)
+    const context = useContext(AppContext)
 
     return(
         <>
@@ -17,7 +17,7 @@ export default function ButtonGroup(props){
                         const data = await props.handleSearchClick()
                         props.setSearched(true)
                         setTimeout(()=>{
-                            resultsContext.setData(data)
+                            context.search.setResults(data)
                             props.setSearched(false)
                         },1000)
                     }}
@@ -26,7 +26,7 @@ export default function ButtonGroup(props){
                     type="button"
                     onClick={()=>{
                         props.handleClearClick()
-                        resultsContext.setData(null)
+                        context.search.setResults(null)
                     }}
                 ><ClearAllIcon/>Clear</button>
             </div>
