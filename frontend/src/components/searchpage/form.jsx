@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import ButtonGroup from './buttongroup';
 import { LocationGroup } from './location';
-import { handleSearchClick } from '../../utils/requests';
+import { useRequest } from '../../utils/requests';
 
 
 
 
 export default function Form({ setSearched }){
 
+    const { handleSearchClick } = useRequest()
     const [keyword,setKeyword] = useState("")
     const [categoryOptions,setCategoryOptions] = useState("AllCategories")
     const [conditionNew,setConditionNew] = useState(false)

@@ -9,10 +9,11 @@ import { WishList } from "./components/wishlist";
 import { DetailsBtnContainer } from "./components/extras/detailsbtn";
 import { ItemDetails } from "./components/itemdetails";
 import { ProgressBar } from "./components/extras/progressbar";
-import { getAllFavourites } from "./utils/requests";
+import { useRequest } from "./utils/requests";
 
 export default function App(){
 
+    const { getAllFavourites } = useRequest()
     const [results,setResults] = useState(null)
     const [resultsWishListBtn,setResultsWishListBtn] = useState(true)
     const [showDetails,setShowDetails] = useState(false)

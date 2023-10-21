@@ -34,7 +34,7 @@ export const FavouritesList = ()=>{
                         favourites.map((item,index) => 
                         <Item 
                             key={index.toString()}
-                            id = {item.id} 
+                            id = {item._id} 
                             index = {index+1}
                             title = {item.title}
                             imageURL = {item.imageURL}

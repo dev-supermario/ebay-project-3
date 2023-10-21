@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { fetchIp } from "../../utils/requests"
+import { useRequest } from "../../utils/requests";
 
 
 export const LocationGroup = (props) => {
+
+    const { fetchIp } = useRequest()
     const [IP,setIP] = useState("")
     const currentLocationRef = useRef(null)
 
