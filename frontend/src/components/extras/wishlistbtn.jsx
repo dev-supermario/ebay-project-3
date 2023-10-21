@@ -2,21 +2,29 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../utils/context';
+import { useRequest } from '../../utils/requests';
+
 
 
 export const WishListBtn = (props) => {
     
+    const { addToFavourites,removeFromFavourites } = useRequest()
     const [addedToCart,setAddedToCart] = useState(false)
     const context = useContext(AppContext)
     const favourites = context.favourites.data
-    // const addToFavourites = context.favourites.setData
-    // console.log(props.data)
+    const setFavourites = context.favourites.setData
 
     useEffect(()=>{
         const found = favourites.find(favourite => favourite["_id"]==props.id)
-        if(found) setAddedToCart(true)
-        else setAddedToCart(false)
-    },[])
+        if(found) {
+            console.log("found")
+            setAddedToCart(true)
+        }
+        else {
+            console.log("not found")
+            setAddedToCart(false)
+        }
+    },[favourites])
 
     return(
         <>
@@ -25,14 +33,21 @@ export const WishListBtn = (props) => {
                 className='btn'
                 onClick={async ()=>{
                     if(!addedToCart){
-                        const res = await props.addToFavourites()
+                        await setFavourites([...favourites,{
+                            _id : props.id, 
+                            title : props.title,
+                            imageURL: props.imageURL, 
+                            price : props.price,
+                            shipping : props.shipping
+                        }])
+                        const res = await addToFavourites({...props})
                         setAddedToCart(res)
                     }
                     else{
-                        const res = await props.removeFromFavourites()
-                        setAddedToCart(res)
-                    }
-                    
+                        await setFavourites(state => state.filter(favourite => favourite["_id"] != props.id))
+                        await removeFromFavourites({...props})
+                        // await setAddedToCart(res)
+                    }                    
                 }}
                 >
                     {

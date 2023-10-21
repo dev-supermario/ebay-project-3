@@ -1,7 +1,7 @@
 
 export const useRequest = () => {
   const handleSearchClick = (params) => async () => {
-    console.log("seraching")
+    // console.log("searching")
   
       let URL = "http://localhost:3001/shopping/getItems?itemsPerPage=50"
   
@@ -15,7 +15,7 @@ export const useRequest = () => {
       if(params.localPickup) URL += `&localPickup=${params.localPickup}`
       if(params.categoryOptions!="AllCategories") URL += `&category=${params.categoryOptions}`
   
-      console.log(URL)
+      // console.log(URL)
   
       const response = await fetch(URL)
       return response.json()
@@ -31,7 +31,7 @@ export const useRequest = () => {
       }
     };
   
-  const addToFavourites = (params) => async () => {
+  const addToFavourites = async (params) => {
     console.log("added to favourites")
     let URL = "http://localhost:3001/favourites/add?"
     if(params.id) URL += `id=${params.id}`
@@ -61,7 +61,7 @@ export const useRequest = () => {
     return data
   }
   
-  const removeFromFavourites = (params) => async () => {
+  const removeFromFavourites = async (params) => {
     console.log("removed from favourites")
     let URL = "http://localhost:3001/favourites/remove?"
     if(params.id) URL += `id=${params.id}`

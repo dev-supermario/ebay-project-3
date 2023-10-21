@@ -1,11 +1,9 @@
 import { WishListBtn } from "../extras/wishlistbtn"
-import { useRequest } from '../../utils/requests';
 
 
 
 export const Item = (props) => {
 
-    const { addToFavourites,removeFromFavourites } = useRequest()
 
     return(
         <>
@@ -34,9 +32,7 @@ export const Item = (props) => {
                 <p className="me-sm-30" style={{minWidth:"70px",maxWidth:"70px"}}>{props.zipcode}</p>
                 <div className="" style={{minWidth:"80px"}}>
                     <WishListBtn
-                        id = {props.id}
-                        addToFavourites={addToFavourites({ ...props })}
-                        removeFromFavourites={removeFromFavourites({ ...props })}
+                        { ...props }
                     />
                 </div>
             </div>

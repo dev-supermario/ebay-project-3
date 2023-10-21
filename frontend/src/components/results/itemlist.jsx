@@ -9,7 +9,6 @@ export const ItemList = ()=>{
     // const count = resultContext.data["@count"]
     const items = context.search.results.item
 
-
     return(
         <>
            {
@@ -36,13 +35,13 @@ export const ItemList = ()=>{
                         items.map((item,index) => 
                         <Item 
                             key={index.toString()}
-                            id = {item.itemId} 
+                            id = {item.itemId[0]} 
                             index = {index+1}
-                            title = {item.title}
-                            imageURL = {item.galleryURL}
+                            title = {item.title[0]}
+                            imageURL = {item.galleryURL[0]}
                             price = {item.sellingStatus[0].currentPrice[0]["__value__"]}
-                            shipping={item.shippingInfo[0].shippingType}
-                            zipcode = {item.postalCode} 
+                            shipping={item.shippingInfo[0].shippingType[0]}
+                            zipcode = {item.postalCode[0]} 
                         />)
                     }
                 </div>

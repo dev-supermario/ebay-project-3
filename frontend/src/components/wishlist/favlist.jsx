@@ -8,11 +8,10 @@ export const FavouritesList = ()=>{
     const context = useContext(AppContext)
     // const count = resultContext.data["@count"]
     const favourites = context.favourites.data
-
     return(
         <>
            {
-            favourites ?
+            favourites.length!=0 ?
             <>
                 <div className="bg-dark text-white w-100 overflow-auto text-nowrap">
                     <div className="d-flex fw-bold pt-10 w-100">
