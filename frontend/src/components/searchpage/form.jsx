@@ -142,6 +142,7 @@ export default function Form({ setSearched }){
                 />
                 <ButtonGroup 
                     handleClearClick={handleClearClick}
+                    searchDisabled = {keyword==""}
                     setSearched={setSearched} 
                     handleSearchClick={handleSearchClick(
                         {

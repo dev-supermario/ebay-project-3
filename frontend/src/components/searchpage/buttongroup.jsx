@@ -13,6 +13,7 @@ export default function ButtonGroup(props){
             <div className="col-12">
                 <button className="btn btn-light" 
                     type="button"
+                    disabled={props.searchDisabled}
                     onClick={async ()=>{
                         const data = await props.handleSearchClick()
                         props.setSearched(true)

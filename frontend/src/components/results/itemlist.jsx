@@ -15,16 +15,18 @@ export const ItemList = ()=>{
             items ?
             <>
                 <div className="bg-dark text-white w-100 overflow-auto text-nowrap">
-                    <div className="d-flex fw-bold pt-10 w-100">
+                    <div className="d-flex fw-bold pt-10 w-100" style={{
+                        borderBottom:"2px solid #2a2e34"
+                    }}>
                         <p className="text-center ps-sm-20 pe-sm-60" style={{
                             minWidth:"40px"
                         }}>#</p>
-                        <p className="me-sm-60" style={{
-                                minWidth:"100px",
+                        <p className="me-20 me-sm-60" style={{
+                                minWidth:"120px",
                             }}
                         >Image</p>
-                        <p  className="ps-10 me-sm-100"
-                            style={{minWidth:"400px"}}
+                        <p  className="ps-10 me-sm-80"
+                            style={{minWidth:"380px"}}
                         >Title</p>
                         <p className="ps-20 me-sm-50" style={{minWidth:"90px",maxWidth:"90px"}}>Price</p>
                         <p className="me-sm-40" style={{minWidth:"130px",maxWidth:"130px"}}>Shipping</p>
@@ -37,6 +39,7 @@ export const ItemList = ()=>{
                             key={index.toString()}
                             id = {item.itemId[0]} 
                             index = {index+1}
+                            itemURL = {item.viewItemURL[0]}
                             title = {item.title[0]}
                             imageURL = {item.galleryURL[0]}
                             price = {item.sellingStatus[0].currentPrice[0]["__value__"]}

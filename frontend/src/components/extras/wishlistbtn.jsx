@@ -17,12 +17,7 @@ export const WishListBtn = (props) => {
     useEffect(()=>{
         const found = favourites.find(favourite => favourite["_id"]==props.id)
         if(found) {
-            console.log("found")
             setAddedToCart(true)
-        }
-        else {
-            console.log("not found")
-            setAddedToCart(false)
         }
     },[favourites])
 
@@ -47,6 +42,7 @@ export const WishListBtn = (props) => {
                         await setFavourites(state => state.filter(favourite => favourite["_id"] != props.id))
                         await removeFromFavourites({...props})
                         // await setAddedToCart(res)
+                        // Look for a better way to accomplish this, possible redux
                     }                    
                 }}
                 >

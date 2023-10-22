@@ -14,10 +14,14 @@ import { useRequest } from "./utils/requests";
 export default function App(){
 
     const { getAllFavourites } = useRequest()
-    const [results,setResults] = useState(null)
+    
     const [resultsWishListBtn,setResultsWishListBtn] = useState(true)
     const [showDetails,setShowDetails] = useState(false)
+    const [popup,setPopup] = useState(false)
+
     const [searched,setSearched] = useState(false)
+
+    const [results,setResults] = useState(null)
     const [favourites,setFavourites] = useState(null)
 
     useEffect(()=>{
@@ -36,10 +40,15 @@ export default function App(){
                     favourites: {
                         data : favourites,
                         setData : setFavourites
+                    },
+                    image : {
+                        popup:popup,
+                        setPopup:setPopup
                     }
                 }
             } >
-                <div className="d-flex flex-column align-items-center py-20 px-10 px-sm-100">
+                <div className="d-flex flex-column align-items-center py-20 px-10 px-sm-100"
+                >
                         <SearchPage
                             setSearched={setSearched}
                         />
@@ -67,7 +76,8 @@ export default function App(){
                                 toggleDetails={setShowDetails} 
                             />
                         </div>
-                        <div className="d-flex flex-column align-items-center py-20 px-10 px-sm-320">
+                        <div className="d-flex flex-column align-items-center py-20 px-10 px-sm-320"
+                        >
                             {
                                 resultsWishListBtn?
                                 <Results/>
