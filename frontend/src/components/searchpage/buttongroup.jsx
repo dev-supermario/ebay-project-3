@@ -15,11 +15,11 @@ export default function ButtonGroup(props){
                     type="button"
                     disabled={props.searchDisabled}
                     onClick={async ()=>{
-                        const data = await props.handleSearchClick()
-                        props.setSearched(true)
+                        const data = await props.handleSearch()
+                        props.setSearched("PENDING")
                         setTimeout(()=>{
                             context.search.setResults(data)
-                            props.setSearched(false)
+                            props.setSearched("YES")
                         },1000)
                     }}
                 ><SearchIcon/>Search</button>
@@ -27,7 +27,8 @@ export default function ButtonGroup(props){
                     type="button"
                     onClick={()=>{
                         props.handleClearClick()
-                        context.search.setResults(null)
+                        context.search.setResults([])
+                        props.setSearched("NO")
                     }}
                 ><ClearAllIcon/>Clear</button>
             </div>

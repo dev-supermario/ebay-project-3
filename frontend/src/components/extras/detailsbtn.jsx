@@ -1,15 +1,15 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
-export const DetailsBtnContainer = ({ toggleDetails }) => {
+export const DetailsBtnContainer = ({ disabled,setShowDetails }) => {
     return(
         <>
             <div className="d-flex justify-content-end w-100">
                 <button 
                     type="button" 
                     className="btn btn-light"
-                    onClick={()=>toggleDetails(true)}
-                    disabled 
+                    onClick={()=>setShowDetails(true)}
+                    disabled = {disabled}
                 >
                     Details
                     <ArrowForwardIosIcon color="disabled" fontSize='small'/>

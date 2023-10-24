@@ -1,12 +1,18 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { WishListBtn } from "../extras/wishlistbtn"
 import { ItemImage } from "../extras/itemimage"
+import { useRequest } from "../../utils/requests"
+import { AppContext } from "../../utils/context"
 
 
 
 export const Item = (props) => {
 
     const [backgroundColor,setBackgroundColor] = useState((props.index%2==0) ? "#212529":"#282a2e")
+    const { getItemDetails } = useRequest()
+    const context = useContext(AppContext)
+    const setItemDetails = context.item.setData
+    // const enableShowDetailsBtn = context.item.enableShow
 
     return(
         <>
@@ -23,7 +29,13 @@ export const Item = (props) => {
                 onMouseLeave={()=>{
                     setBackgroundColor((props.index%2==0) ? "#212529":"#282a2e")
                 }}
-                onClick={()=>{console.log("click")}}
+                onClick={()=>{
+                    getItemDetails({ id:props.id })
+                    .then(res => {
+                        setItemDetails(res)
+                    })
+
+                }}
                 >
                     
                 <p className="text-center ps-sm-20 pe-sm-60" style={{

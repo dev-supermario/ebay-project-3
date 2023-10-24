@@ -125,7 +125,7 @@ router.get('/getSingleItem',(req,res)=>{
         }
         axios.get(URL,config)
         .then(res => res.data)
-        .then(data => res.status(200).send(data))
+        .then(data => res.status(200).send(data.Item))
         .catch(error => res.status(400).send(error))
     })
     .catch(error => res.status(400).send(error))

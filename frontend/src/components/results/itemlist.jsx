@@ -1,13 +1,13 @@
 import { useContext } from "react"
 import { AppContext } from "../../utils/context"
 import { Item } from "./item"
-import { NoResults } from "../extras/noresults"
+// import { NoResults } from "../extras/noresults"
 
 export const ItemList = ()=>{
 
     const context = useContext(AppContext)
     // const count = resultContext.data["@count"]
-    const items = context.search.results.item
+    const items = context.search.results ? context.search.results.item : null
 
     return(
         <>
@@ -36,7 +36,7 @@ export const ItemList = ()=>{
                     {
                         items.map((item,index) => 
                         <Item 
-                            key={index.toString()}
+                            key={item.itemId[0]}
                             id = {item.itemId[0]} 
                             index = {index+1}
                             itemURL = {item.viewItemURL[0]}
@@ -51,7 +51,7 @@ export const ItemList = ()=>{
             </>
             :
             <>
-                <NoResults/>
+                {/* <NoResults/> */}
             </>
            }
         </>

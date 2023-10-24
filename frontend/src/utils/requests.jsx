@@ -1,7 +1,9 @@
 
 export const useRequest = () => {
-  const handleSearchClick = (params) => async () => {
-    // console.log("searching")
+
+  // possibly handle setting data here
+
+  const handleSearch = (params) => async () => {
   
       let URL = "http://localhost:3001/shopping/getItems?itemsPerPage=50"
   
@@ -14,11 +16,33 @@ export const useRequest = () => {
       if(params.freeShipping) URL += `&freeShipping=${params.freeShipping}`
       if(params.localPickup) URL += `&localPickup=${params.localPickup}`
       if(params.categoryOptions!="AllCategories") URL += `&category=${params.categoryOptions}`
-  
-      // console.log(URL)
-  
-      const response = await fetch(URL)
+
+      const config = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+    
+      const response = await fetch(URL,config)
       return response.json()
+  }
+
+  const getItemDetails = async (params) => {
+
+
+      let URL = `http://localhost:3001/shopping/getSingleItem?itemID=${params.id}&needDescription=true`
+
+      const config = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+
+      const response = await fetch(URL,config)
+      return response.json()
+
   }
   
   const fetchIp = async () => {
@@ -80,7 +104,7 @@ export const useRequest = () => {
     return false
   }
 
-  return { handleSearchClick, fetchIp, addToFavourites, removeFromFavourites, getAllFavourites }
+  return { handleSearch,getItemDetails ,fetchIp, addToFavourites, removeFromFavourites, getAllFavourites }
 
 }
 

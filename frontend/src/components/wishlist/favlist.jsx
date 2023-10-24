@@ -1,13 +1,12 @@
 import { useContext } from "react"
 import { AppContext } from "../../utils/context"
 import { Item } from "./favourite"
-import { NoResults } from "../extras/noresults"
 
 export const FavouritesList = ()=>{
 
     const context = useContext(AppContext)
     // const count = resultContext.data["@count"]
-    const favourites = context.favourites.data
+    const favourites = context.favourites.data ? context.favourites.data : []
     let totalPrice = 0;
 
 
@@ -17,7 +16,7 @@ export const FavouritesList = ()=>{
             favourites.length!=0 ?
             <>
                 <div className="bg-dark text-white w-100 overflow-auto text-nowrap">
-                    <div className="d-flex fw-bold pt-10 w-100" style={{
+                    <div key={"0"} className="d-flex fw-bold pt-10 w-100" style={{
                         borderBottom:"2px solid #2a2e34"
                     }}>
                         <p className="text-center ps-sm-20 pe-sm-60" style={{
@@ -40,7 +39,7 @@ export const FavouritesList = ()=>{
                             return(
                                 <>
                                     <Item 
-                                        key={index.toString()}
+                                        key={String(item._id)}
                                         id = {item._id} 
                                         index = {index+1}
                                         title = {item.title}
@@ -52,7 +51,7 @@ export const FavouritesList = ()=>{
                             )
                         } )
                     }
-                    <div className="d-flex pt-10 w-100 ps-670">
+                    <div key={`${favourites.length+1}`} className="d-flex pt-10 w-100 ps-670">
                         <p className="text-wrap me-30 me-sm-80 ms-sm-270" style={{minWidth:"100px",maxWidth:"100px"}}>Total Shopping</p>
                         <p className="ps-10 ms-sm-30">${totalPrice}</p>
                     </div>
@@ -60,7 +59,6 @@ export const FavouritesList = ()=>{
             </>
             :
             <>
-                <NoResults/>
             </>
            }
         </>

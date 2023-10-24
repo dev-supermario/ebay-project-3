@@ -39,9 +39,9 @@ export const WishListBtn = (props) => {
                         setAddedToCart(res)
                     }
                     else{
-                        await setFavourites(state => state.filter(favourite => favourite["_id"] != props.id))
+                        const res = await setFavourites(state => state.filter(favourite => favourite["_id"] != props.id))
                         await removeFromFavourites({...props})
-                        // await setAddedToCart(res)
+                        await setAddedToCart(res)
                         // Look for a better way to accomplish this, possible redux
                     }                    
                 }}

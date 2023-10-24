@@ -10,6 +10,7 @@ import { DetailsBtnContainer } from "./components/extras/detailsbtn";
 import { ItemDetails } from "./components/itemdetails";
 import { ProgressBar } from "./components/extras/progressbar";
 import { useRequest } from "./utils/requests";
+import { NoResults } from "./components/extras/noresults";
 
 export default function App(){
 
@@ -19,16 +20,17 @@ export default function App(){
     const [showDetails,setShowDetails] = useState(false)
     const [popup,setPopup] = useState(false)
 
-    const [searched,setSearched] = useState(false)
+    const [searched,setSearched] = useState("NO")
 
-    const [results,setResults] = useState(null)
-    const [favourites,setFavourites] = useState(null)
+    const [itemDetails,setItemDetails] = useState(null)
+    const [results,setResults] = useState([])
+    const [favourites,setFavourites] = useState([])
 
     useEffect(()=>{
         getAllFavourites()
         .then(res => {
-            // console.log(res.data)
-            setFavourites(res)
+            // console.log(res)
+            setFavourites(res.length==0 ? [] : res)
         })
     },[])
 
@@ -44,10 +46,16 @@ export default function App(){
                     image : {
                         popup:popup,
                         setPopup:setPopup
+                    },
+                    item : {
+                        show : showDetails,
+                        enableShow : setShowDetails,
+                        data : itemDetails,
+                        setData : setItemDetails,
                     }
                 }
             } >
-                <div className="d-flex flex-column align-items-center py-20 px-10 px-sm-100"
+                <div className="d-flex flex-column align-items-center py-20 px-10 px-sm-200"
                 >
                         <SearchPage
                             setSearched={setSearched}
@@ -59,41 +67,86 @@ export default function App(){
                         />
                         <Spacer horizontalSpacing={0} verticalSpacing={10} />
                         {
-                            searched ?
-                            <ProgressBar
-                                setSearched={setSearched}
-                            />
+                            searched === "PENDING" ?
+                            <ProgressBar/>
                             :
                             <></>
                         }
                 </div>
-                <Spacer verticalSpacing="10" />
                 {
-                    results || !resultsWishListBtn ?
+                    (results || favourites) && !showDetails ?
                     <>
-                        <div className="px-sm-250">
-                            <DetailsBtnContainer 
-                                toggleDetails={setShowDetails} 
-                            />
-                        </div>
-                        <div className="d-flex flex-column align-items-center py-20 px-10 px-sm-320"
+                        {
+                            resultsWishListBtn ?
+                            <>
+                                {
+                                    results.length != 0 ? 
+                                    <>
+                                        <div className="px-sm-180">
+                                            <DetailsBtnContainer 
+                                                disabled={itemDetails==null} 
+                                                setShowDetails={setShowDetails}
+                                            />
+                                        </div>
+                                    </>
+                                    :
+                                    <></>
+                                }
+                            </>
+                            :
+                            <>
+                                {
+                                    favourites.length != 0 ? 
+                                    <>
+                                        <div className="px-sm-180">
+                                            <DetailsBtnContainer 
+                                                disabled={itemDetails==null} 
+                                                setShowDetails={setShowDetails}
+                                            />
+                                        </div>
+                                    </>
+                                    :
+                                    <></>
+                                }
+                            </>
+                        }
+                        <div className="d-flex flex-column align-items-center py-20 px-10 px-sm-230"
                         >
                             {
-                                resultsWishListBtn?
-                                <Results/>
+                                resultsWishListBtn ?
+                                <>
+                                    {
+                                        searched === "YES" ?
+                                        <>
+                                            {
+                                                results.length != 0 ?
+                                                <Results/>
+                                                :
+                                                <NoResults/>
+                                            }
+                                        </>  
+                                        :
+                                        <></>
+                                    }
+                                </>
                                 :
-                                <WishList/>
-                            }
-                            {
-                                showDetails && !resultsWishListBtn?
-                                <ItemDetails/>
-                                :
-                                <></> 
+                                <>
+                                    {
+                                        favourites.length != 0 ?
+                                        <WishList/>
+                                        :
+                                        <NoResults/>
+                                    }
+                                </>
                             }
                         </div>
                     </>
                     :
-                    <></>
+                    <>
+                        <div className="d-flex flex-column align-items-center  px-10 px-sm-230">
+                                <ItemDetails setShowDetails={setShowDetails}/>
+                        </div>
+                    </>
                 }
             </AppContext.Provider>
         </>

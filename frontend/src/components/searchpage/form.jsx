@@ -8,7 +8,7 @@ import { useRequest } from '../../utils/requests';
 
 export default function Form({ setSearched }){
 
-    const { handleSearchClick } = useRequest()
+    const { handleSearch } = useRequest()
     const [keyword,setKeyword] = useState("")
     const [categoryOptions,setCategoryOptions] = useState("AllCategories")
     const [conditionNew,setConditionNew] = useState(false)
@@ -144,7 +144,7 @@ export default function Form({ setSearched }){
                     handleClearClick={handleClearClick}
                     searchDisabled = {keyword==""}
                     setSearched={setSearched} 
-                    handleSearchClick={handleSearchClick(
+                    handleSearch={handleSearch(
                         {
                             keyword,
                             categoryOptions,
