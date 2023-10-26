@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { WishListBtn } from '../extras/wishlistbtn';
 import { ItemImage } from '../extras/itemimage';
+import { useRequest } from '../../utils/requests';
+import { AppContext } from '../../utils/context';
 
 
 export const Item = (props) => {
+
+    const context = useContext(AppContext)
+    const { getItemDetails } = useRequest()
     const [backgroundColor,setBackgroundColor] = useState((props.index%2==0) ? "#212529":"#282a2e")
+    const setItemDetails = context.item.setData
+    const enableShowDetailsBtn = context.item.enableShow
+
 
     return(
         <>
@@ -30,7 +38,15 @@ export const Item = (props) => {
                 }}>{props.index}</p>
                 <ItemImage imageURL={props.imageURL} />
 
-                <p className="ps-10 text-truncate me-sm-100" style={{minWidth:"400px",maxWidth:"400px"}}>{props.title}</p>
+                <p className="ps-10 text-truncate me-sm-100" style={{minWidth:"400px",maxWidth:"400px",textDecoration:"none",color:"#1657b4",cursor:"pointer"}} onClick={()=> {
+                        getItemDetails({ id:props.id })
+                        .then(res => {
+                            setItemDetails(res)
+                        })
+                        .then(()=>enableShowDetailsBtn(true))
+                    }}
+                    
+                    >{props.title}</p>
                 <p className="ps-20 me-sm-80" style={{minWidth:"90px"}}>${props.price}</p>
                 <p className="text-wrap me-sm-80" style={{minWidth:"130px",maxWidth:"130px"}}>{props.shipping} Shipping</p>
                 

@@ -1,13 +1,32 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AppContext } from "../../utils/context"
 import { Item } from "./favourite"
+import { Pagination } from "../extras/pagination"
+
 
 export const FavouritesList = ()=>{
 
     const context = useContext(AppContext)
     // const count = resultContext.data["@count"]
     const favourites = context.favourites.data ? context.favourites.data : []
+    const [currentPage,setCurrentPage] = useState(0)
     let totalPrice = 0;
+    const paginatedFavourites = favourites.map((item,index) =>{
+        totalPrice += parseFloat(item.price)
+        return(
+            <>
+                <Item 
+                    key={String(item._id)}
+                    id = {item._id} 
+                    index = {index+1}
+                    title = {item.title}
+                    imageURL = {item.imageURL}
+                    price = {item.price}
+                    shipping={item.shipping}
+                />
+            </>
+        )
+    } )
 
 
     return(
@@ -33,29 +52,15 @@ export const FavouritesList = ()=>{
                         <p className="me-sm-80" style={{minWidth:"130px",maxWidth:"130px"}}>Shipping Option</p>
                         <p className="px-10 " style={{minWidth:"80px",maxWidth:"80px"}}>Favourite</p>
                     </div>
-                    {
-                        favourites.map((item,index) =>{
-                            totalPrice += parseFloat(item.price)
-                            return(
-                                <>
-                                    <Item 
-                                        key={String(item._id)}
-                                        id = {item._id} 
-                                        index = {index+1}
-                                        title = {item.title}
-                                        imageURL = {item.imageURL}
-                                        price = {item.price}
-                                        shipping={item.shipping}
-                                    />
-                                </>
-                            )
-                        } )
+                    {   
+                        paginatedFavourites.splice(currentPage*10,currentPage*10+10)    
                     }
                     <div key={`${favourites.length+1}`} className="d-flex pt-10 w-100 ps-670">
                         <p className="text-wrap me-30 me-sm-80 ms-sm-270" style={{minWidth:"100px",maxWidth:"100px"}}>Total Shopping</p>
                         <p className="ps-10 ms-sm-30">${totalPrice}</p>
                     </div>
                 </div>
+                <Pagination count={favourites.length} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </>
             :
             <>

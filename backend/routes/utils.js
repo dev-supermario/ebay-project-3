@@ -26,15 +26,19 @@ router.get("/getPhotos",(req,res)=>{
     let URL = `https://www.googleapis.com/customsearch/v1?cx=${process.env.GOOGLE_SEARCH_ENGINE_ID}&key=${process.env.GOOGLE_API_KEY}&imgSize=huge&imgType=photo&num=8&searchType=image&q=${keyword}`
 
     const config = {
+        // method: "GET",
         headers: {
-            'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         }
-    }
+      }
 
-    console.log(URL)
+    // console.log(URL)
     axios.get(URL,config)
     .then(res => res.data)
-    .then(data => res.status(200).send(data))
+    .then(data => data.items)
+    // .then(data => console.log(data))
+    .then(data => data.map(image => image.link))
+    .then(images => res.status(200).send({images : images}))
     .catch(error => res.status(400).send(error))
 
 })

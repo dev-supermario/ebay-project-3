@@ -18,7 +18,6 @@ export default function App(){
     
     const [resultsWishListBtn,setResultsWishListBtn] = useState(true)
     const [showDetails,setShowDetails] = useState(false)
-    const [popup,setPopup] = useState(false)
 
     const [searched,setSearched] = useState("NO")
 
@@ -42,10 +41,6 @@ export default function App(){
                     favourites: {
                         data : favourites,
                         setData : setFavourites
-                    },
-                    image : {
-                        popup:popup,
-                        setPopup:setPopup
                     },
                     item : {
                         show : showDetails,

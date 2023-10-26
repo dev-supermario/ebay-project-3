@@ -1,13 +1,28 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AppContext } from "../../utils/context"
 import { Item } from "./item"
+import { Pagination } from "../extras/pagination"
 // import { NoResults } from "../extras/noresults"
 
 export const ItemList = ()=>{
 
     const context = useContext(AppContext)
-    // const count = resultContext.data["@count"]
+    const count = context.search.results["@count"]
     const items = context.search.results ? context.search.results.item : null
+    const [currentPage,setCurrentPage] = useState(0)
+    const paginatedItems = items.map((item,index) => 
+        <Item 
+            key={item.itemId[0]}
+            id = {item.itemId[0]} 
+            index = {index+1}
+            itemURL = {item.viewItemURL[0]}
+            title = {item.title[0]}
+            imageURL = {item.galleryURL[0]}
+            price = {item.sellingStatus[0].currentPrice[0]["__value__"]}
+            shipping={item.shippingInfo[0].shippingType[0]}
+            zipcode = {item.postalCode[0]} 
+        />
+    )
 
     return(
         <>
@@ -34,20 +49,11 @@ export const ItemList = ()=>{
                         <p className="ps-10" style={{minWidth:"80px",maxWidth:"80px"}}>Wish List</p>
                     </div>
                     {
-                        items.map((item,index) => 
-                        <Item 
-                            key={item.itemId[0]}
-                            id = {item.itemId[0]} 
-                            index = {index+1}
-                            itemURL = {item.viewItemURL[0]}
-                            title = {item.title[0]}
-                            imageURL = {item.galleryURL[0]}
-                            price = {item.sellingStatus[0].currentPrice[0]["__value__"]}
-                            shipping={item.shippingInfo[0].shippingType[0]}
-                            zipcode = {item.postalCode[0]} 
-                        />)
+                        paginatedItems.slice(currentPage*10,currentPage*10+10)
                     }
+                    
                 </div>
+                <Pagination count={count} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </>
             :
             <>

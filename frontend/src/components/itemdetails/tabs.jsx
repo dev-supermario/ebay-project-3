@@ -50,7 +50,7 @@ const Button = ({ status,text,setStatus }) => {
         <>
             <button
                 style={ status==text ? darkBtn : lightBtn}  
-                className="border-0 px-7 py-6 rounded-top"
+                className="border-0 px-7 px-sm-20 py-6 py-sm-8 rounded-top"
                 onClick={()=>setStatus(text)}
             >
                 {text}

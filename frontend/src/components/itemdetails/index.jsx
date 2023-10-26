@@ -3,6 +3,7 @@ import { AppContext } from "../../utils/context"
 import { ButtonGroup } from "./buttongroup"
 import { Tabs } from "./tabs"
 import { ProductTab } from "./product"
+import { Photos } from "./photos"
 
 
 export const ItemDetails = ({ setShowDetails }) => {
@@ -10,7 +11,7 @@ export const ItemDetails = ({ setShowDetails }) => {
     const context = useContext(AppContext)
     const item = context.item.data ? context.item.data : []
     const [selected,setSelected] = useState("Product")
-    // console.log(item)
+    console.log(selected)
 
 
     return(
@@ -22,7 +23,15 @@ export const ItemDetails = ({ setShowDetails }) => {
                 {
                     selected=="Product" ?
                     <>
-                        <ProductTab item={item} />
+                        <ProductTab item = {item} />
+                    </>
+                    :
+                    <></>
+                }
+                {
+                    selected=="Photos" ?
+                    <>
+                      <Photos keyword = {item.Title} layout="masonry"/>
                     </>
                     :
                     <></>

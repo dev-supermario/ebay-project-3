@@ -12,7 +12,7 @@ export const Item = (props) => {
     const { getItemDetails } = useRequest()
     const context = useContext(AppContext)
     const setItemDetails = context.item.setData
-    // const enableShowDetailsBtn = context.item.enableShow
+    const enableShowDetailsBtn = context.item.enableShow
 
     return(
         <>
@@ -44,7 +44,14 @@ export const Item = (props) => {
                 
                 <ItemImage imageURL = {props.imageURL} />
 
-                <a href={props.itemURL} style={{textDecoration:"none",color:"#1657b4"}} rel="noreferrer" target="_blank"><p className="ps-10 text-truncate me-sm-80" style={{minWidth:"380px",maxWidth:"380px"}}>{props.title}</p></a>
+                <p className="ps-10 text-truncate me-sm-80" style={{minWidth:"380px",maxWidth:"380px",textDecoration:"none",color:"#1657b4",cursor:"pointer"}} onClick={()=> {
+                    getItemDetails({ id:props.id })
+                    .then(res => {
+                        setItemDetails(res)
+                    })
+                    .then(()=>enableShowDetailsBtn(true))
+                }} >{props.title}</p>
+                
                 <p className="ps-20 me-sm-50" style={{minWidth:"90px"}}>${props.price}</p>
                 <p className="text-wrap me-sm-40" style={{minWidth:"130px",maxWidth:"130px"}}>{props.shipping} Shipping</p>
                 <p className="me-sm-30" style={{minWidth:"70px",maxWidth:"70px"}}>{props.zipcode}</p>

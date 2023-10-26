@@ -1,9 +1,10 @@
-import { useContext } from "react"
-import { AppContext } from "../../utils/context"
+import {  useState } from "react"
 
 export const ItemImage = (props) => {
 
-    const context = useContext(AppContext)
+    // const context = useContext(AppContext)
+    // console.log(props)
+    const [popup,setPopup] = useState(false)
 
     return (
         <>
@@ -22,12 +23,12 @@ export const ItemImage = (props) => {
                         maxWidth:"120px" , maxHeight:"120px"
                     }}
                     onClick={()=>{
-                        context.image.setPopup(true)
+                       setPopup(true)
                     } }    
                 />
             </div>
             {
-                context.image.popup ?
+                popup ?
                 <div
                     style={{
                         top:"0",
@@ -41,7 +42,7 @@ export const ItemImage = (props) => {
                         backgroundColor:"#0f0f0f",
                     }}
                     onClick={()=>{
-                        context.image.setPopup(false)
+                        setPopup(false)
                     }}
                 >
                     <img 
