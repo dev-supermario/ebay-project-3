@@ -1,7 +1,7 @@
 export const Pagination = ({ count,currentPage,setCurrentPage }) => {
     
-    const noOfPages = count/10 + (count%10>0 ? 1 : 0)
-    console.log(noOfPages)
+    const noOfPages = parseInt(count/10) + (count%10 > 0 ? 1 : 0)
+    // console.log(noOfPages)
 
     const renderPageNos = () => {
         const pages = []
@@ -41,7 +41,7 @@ export const Pagination = ({ count,currentPage,setCurrentPage }) => {
     return(
         <>
             {
-                noOfPages >= 2 ?
+                noOfPages > 1 ?
                 <>
                     <div className="d-flex mt-10">
                         <button 

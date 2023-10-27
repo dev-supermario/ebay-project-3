@@ -11,6 +11,7 @@ const app = express()
 
 DBConnect()
 app.use(cors())
+app.use(express.json())
 app.use('/utils',utilRoutes)
 app.use('/shopping',shoppingRoutes)
 app.use('/favourites',favouriteRoutes)

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { WishListBtn } from "../extras/wishlistbtn"
 import { ItemImage } from "../extras/itemimage"
 import { useRequest } from "../../utils/requests"
@@ -11,8 +11,25 @@ export const Item = (props) => {
     const [backgroundColor,setBackgroundColor] = useState((props.index%2==0) ? "#212529":"#282a2e")
     const { getItemDetails } = useRequest()
     const context = useContext(AppContext)
-    const setItemDetails = context.item.setData
-    const enableShowDetailsBtn = context.item.enableShow
+    const setItemDetails = context.item.results.setData
+    // const resultItemData = context.item.results.data
+    const enableShowDetailsBtn = context.enableShow
+
+    const [currItem,setCurrItem] = useState(null)
+
+    useEffect(()=> {
+        getItemDetails({ id:props.item.id })
+        .then(res => {
+            setCurrItem({
+                ...props.item,
+                images: res.PictureURL,
+                location: res.Location,
+                returnPolicy : res.ReturnPolicy ? res.ReturnPolicy : "",
+                itemSpecifics : res.ItemSpecifics.NameValueList,
+                storeInfo : res.Storefront ? res.Storefront : ""
+            })
+        })
+    },[])
 
     return(
         <>
@@ -30,11 +47,8 @@ export const Item = (props) => {
                     setBackgroundColor((props.index%2==0) ? "#212529":"#282a2e")
                 }}
                 onClick={()=>{
-                    getItemDetails({ id:props.id })
-                    .then(res => {
-                        setItemDetails(res)
-                    })
-
+                    console.log("click")
+                    setItemDetails(currItem)
                 }}
                 >
                     
@@ -42,23 +56,20 @@ export const Item = (props) => {
                     minWidth:"40px"
                 }}>{props.index}</p>
                 
-                <ItemImage imageURL = {props.imageURL} />
+                <ItemImage imageURL = {props.item.imageURL} />
 
                 <p className="ps-10 text-truncate me-sm-80" style={{minWidth:"380px",maxWidth:"380px",textDecoration:"none",color:"#1657b4",cursor:"pointer"}} onClick={()=> {
-                    getItemDetails({ id:props.id })
-                    .then(res => {
-                        setItemDetails(res)
-                    })
-                    .then(()=>enableShowDetailsBtn(true))
-                }} >{props.title}</p>
+                    setItemDetails(currItem)
+                    enableShowDetailsBtn(true)
+                }} >{props.item.title}</p>
                 
-                <p className="ps-20 me-sm-50" style={{minWidth:"90px"}}>${props.price}</p>
-                <p className="text-wrap me-sm-40" style={{minWidth:"130px",maxWidth:"130px"}}>{props.shipping} Shipping</p>
-                <p className="me-sm-30" style={{minWidth:"70px",maxWidth:"70px"}}>{props.zipcode}</p>
+                <p className="ps-20 me-sm-50" style={{minWidth:"90px"}}>${props.item.price}</p>
+                <p className="text-wrap me-sm-40" style={{minWidth:"130px",maxWidth:"130px"}}>{props.item.shippingType} Shipping</p>
+                <p className="me-sm-30" style={{minWidth:"70px",maxWidth:"70px"}}>{props.item.zipcode}</p>
 
                 <div className="" style={{minWidth:"80px"}}>
                     <WishListBtn
-                        { ...props }
+                        item = {currItem}
                     />
                 </div>
             </div>

@@ -10,18 +10,30 @@ export const ItemList = ()=>{
     const count = context.search.results["@count"]
     const items = context.search.results ? context.search.results.item : null
     const [currentPage,setCurrentPage] = useState(0)
-    const paginatedItems = items.map((item,index) => 
-        <Item 
-            key={item.itemId[0]}
-            id = {item.itemId[0]} 
-            index = {index+1}
-            itemURL = {item.viewItemURL[0]}
-            title = {item.title[0]}
-            imageURL = {item.galleryURL[0]}
-            price = {item.sellingStatus[0].currentPrice[0]["__value__"]}
-            shipping={item.shippingInfo[0].shippingType[0]}
-            zipcode = {item.postalCode[0]} 
-        />
+    const paginatedItems = items.map((item,index) => {
+            const itemDetails = {
+                id: item.itemId[0], 
+                itemURL: item.viewItemURL[0],
+                title : item.title[0],
+                imageURL : item.galleryURL[0],
+                price : item.sellingStatus[0].currentPrice[0]["__value__"],
+                shippingType : item.shippingInfo[0].shippingType[0],
+                zipcode : item.postalCode[0],
+                shippingInfo: item.shippingInfo[0],
+                returnsAccepted : item.returnsAccepted ? item.returnsAccepted : "",
+                sellerInfo: item.sellerInfo ? item.sellerInfo[0] : "",
+            }
+
+            return(
+                <>
+                    <Item 
+                        key={item.itemId[0]}
+                        index = {index+1}
+                        item = {itemDetails}
+                    />
+                </>
+            )
+        }
     )
 
     return(

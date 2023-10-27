@@ -12,6 +12,20 @@ export const FavouritesList = ()=>{
     const [currentPage,setCurrentPage] = useState(0)
     let totalPrice = 0;
     const paginatedFavourites = favourites.map((item,index) =>{
+
+        // const itemDetails = {
+        //     id: item._id, 
+        //     itemURL: item.itemURL,
+        //     title : item.title,
+        //     imageURL : item.imageURL,
+        //     price : item.price,
+        //     shippingType : item.shippingType,
+        //     zipcode : item.postalCode[0],
+        //     shippingInfo: item.shippingInfo,
+        //     sellerInfo: item.sellerInfo
+        // }
+
+
         totalPrice += parseFloat(item.price)
         return(
             <>
@@ -19,10 +33,7 @@ export const FavouritesList = ()=>{
                     key={String(item._id)}
                     id = {item._id} 
                     index = {index+1}
-                    title = {item.title}
-                    imageURL = {item.imageURL}
-                    price = {item.price}
-                    shipping={item.shipping}
+                    item = {item}
                 />
             </>
         )

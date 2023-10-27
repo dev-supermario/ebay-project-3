@@ -21,9 +21,16 @@ export default function App(){
 
     const [searched,setSearched] = useState("NO")
 
-    const [itemDetails,setItemDetails] = useState(null)
+
+    // ITEM DETAILS BASED ON TYPE
+    const [favouriteDetails,setFavouriteDetails] = useState(null)
+    const [resultDetails,setResultDetails] = useState(null)
+
+    // LIST OF ITEMS BASED ON TYPE 
     const [results,setResults] = useState([])
     const [favourites,setFavourites] = useState([])
+
+    // console.log(favourites)
 
     useEffect(()=>{
         getAllFavourites()
@@ -37,16 +44,29 @@ export default function App(){
         <>
             <AppContext.Provider value={
                 {
-                    search: { results,setResults },
+                    search: { 
+                        results,
+                        setResults 
+                    },
                     favourites: {
                         data : favourites,
                         setData : setFavourites
                     },
+                    show : showDetails,
+                    enableShow : setShowDetails,
+                    // item : {
+                    //     data : itemDetails,
+                    //     setData : setItemDetails,
+                    // },
                     item : {
-                        show : showDetails,
-                        enableShow : setShowDetails,
-                        data : itemDetails,
-                        setData : setItemDetails,
+                        favourite : {
+                            data: favouriteDetails,
+                            setData : setFavouriteDetails
+                        },
+                        results : {
+                            data : resultDetails,
+                            setData: setResultDetails
+                        }
                     }
                 }
             } >
@@ -79,7 +99,7 @@ export default function App(){
                                     <>
                                         <div className="px-sm-180">
                                             <DetailsBtnContainer 
-                                                disabled={itemDetails==null} 
+                                                disabled={resultDetails==null} 
                                                 setShowDetails={setShowDetails}
                                             />
                                         </div>
@@ -95,7 +115,7 @@ export default function App(){
                                     <>
                                         <div className="px-sm-180">
                                             <DetailsBtnContainer 
-                                                disabled={itemDetails==null} 
+                                                disabled={favouriteDetails==null} 
                                                 setShowDetails={setShowDetails}
                                             />
                                         </div>
@@ -139,7 +159,10 @@ export default function App(){
                     :
                     <>
                         <div className="d-flex flex-column align-items-center  px-10 px-sm-230">
-                                <ItemDetails setShowDetails={setShowDetails}/>
+                                <ItemDetails 
+                                    itemType={resultsWishListBtn}  
+                                    setShowDetails={setShowDetails}
+                                />
                         </div>
                     </>
                 }

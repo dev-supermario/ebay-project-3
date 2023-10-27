@@ -58,17 +58,12 @@ export const useRequest = () => {
   const addToFavourites = async (params) => {
     console.log("added to favourites")
     let URL = "http://localhost:3001/favourites/add?"
-    if(params.id) URL += `id=${params.id}`
-    if(params.title) URL += `&title=${params.title}`
-    if(params.imageURL) URL += `&imageURL=${params.imageURL}`
-    if(params.price) URL += `&price=${params.price}`
-    if(params.shipping) URL += `&shipping=${params.shipping}`
-  
     const config = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-      }
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
     }
   
     const data = await fetch(URL,config)
@@ -86,6 +81,7 @@ export const useRequest = () => {
   }
   
   const removeFromFavourites = async (params) => {
+    console.log(params)
     console.log("removed from favourites")
     let URL = "http://localhost:3001/favourites/remove?"
     if(params.id) URL += `id=${params.id}`

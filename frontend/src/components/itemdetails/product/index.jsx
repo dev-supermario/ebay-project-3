@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { Photos } from "../photos"
 import { Attribute } from "./attribute"
+import { Carousel } from "./carousel"
 
 export const ProductTab = ({ item }) => {
-    // console.log(item)
-    const itemSpecifics = item.ItemSpecifics.NameValueList
+    console.log(item)
+    const itemSpecifics = item.itemSpecifics
     const [viewPhotos,setViewPhotos] = useState(false)
 
     return (
@@ -21,20 +21,19 @@ export const ProductTab = ({ item }) => {
                 {
                     viewPhotos ?
                     <>
-                        <Photos keyword={item.Title} layout="carousel" setCarouselView={setViewPhotos}/>
+                        <Carousel URLs={item.images} setCarouselView={setViewPhotos}/>
                     </>
                     :
                     <>
                     </>
                 }
-                <Attribute index="2" name={"Price"} value={`$${item.ConvertedCurrentPrice.Value}`} />
-                <Attribute index="3" name={"Location"} value={item.Location} />
+                <Attribute index="2" name={"Price"} value={`$${item.price}`} />
+                <Attribute index="3" name={"Location"} value={item.location} />
                 <Attribute index="4" name={"Return Policy"} 
-                    value={item.ReturnsPolicy ? (item.ReturnPolicy.ReturnsAccepted ? item.ReturnPolicy.ReturnsAccepted: "") + (item.ReturnPolicy.ReturnsWithin ? "Within " + item.ReturnPolicy.ReturnsWithin : "") : ""} 
+                    value={item.returnPolicy ? (item.returnPolicy.ReturnsAccepted ? item.returnPolicy.ReturnsAccepted: "") + (item.returnPolicy.ReturnsWithin ? "Within " + item.returnPolicy.ReturnsWithin : "") : ""} 
                 />
                 {
                     itemSpecifics.map((attribute,index) => {
-                        // console.log(attribute)
                         return(
                             <>
                                 <Attribute key={attribute.Name} index={index} name={attribute.Name} value={attribute.Value[0]} />

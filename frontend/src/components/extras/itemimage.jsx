@@ -2,8 +2,6 @@ import {  useState } from "react"
 
 export const ItemImage = (props) => {
 
-    // const context = useContext(AppContext)
-    // console.log(props)
     const [popup,setPopup] = useState(false)
 
     return (

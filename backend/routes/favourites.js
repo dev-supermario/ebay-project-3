@@ -14,23 +14,15 @@ router.get("/getAll",async (req,res)=>{
 })
 
 router.post("/add",async (req,res)=>{
-    const id = req.query.id
-    const imageURL = req.query.imageURL
-    const title = req.query.title
-    const price = req.query.price
-    const shipping = req.query.shipping
 
-    const document = {
-        "_id":id,
-        "imageURL":imageURL,
-        "title":title,
-        "price":price,
-        "shipping":shipping
-    }
+    
+    let document = req.body
+    
+    const {id,...rest} = document
 
-    collection.insertOne(document)
+    collection.insertOne({_id:id,...rest})
     .then(()=> res.status(200).send({"message":"document added successfully"}))
-    .catch((e)=>res.status(400).send(e))
+    .catch((e)=>res.status(400).send({"data":{...rest}}))
 })
 
 router.delete("/remove",async (req,res)=>{

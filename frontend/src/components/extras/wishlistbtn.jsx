@@ -15,11 +15,19 @@ export const WishListBtn = (props) => {
     const setFavourites = context.favourites.setData
 
     useEffect(()=>{
-        const found = favourites.find(favourite => favourite["_id"]==props.id)
+        let id
+        if(props.item){
+            id = props.item.id ? props.item.id : props.item["_id"]
+        }
+        // console.log(id)
+        const found = favourites.find(favourite => favourite["_id"]==id)
+        // console.log(found)
+
         if(found) {
+            // console.log("inside")
             setAddedToCart(true)
         }
-    },[favourites])
+    },[favourites,props])
 
     return(
         <>
@@ -28,19 +36,13 @@ export const WishListBtn = (props) => {
                 className='btn'
                 onClick={async ()=>{
                     if(!addedToCart){
-                        await setFavourites([...favourites,{
-                            _id : props.id, 
-                            title : props.title,
-                            imageURL: props.imageURL, 
-                            price : props.price,
-                            shipping : props.shipping
-                        }])
-                        const res = await addToFavourites({...props})
+                        await setFavourites([...favourites,props.item])
+                        const res = await addToFavourites(props.item)
                         setAddedToCart(res)
                     }
                     else{
-                        const res = await setFavourites(state => state.filter(favourite => favourite["_id"] != props.id))
-                        await removeFromFavourites({...props})
+                        const res = await setFavourites(state => state.filter(favourite => favourite["_id"] != props.item.id))
+                        await removeFromFavourites({...props.item})
                         await setAddedToCart(res)
                         // Look for a better way to accomplish this, possible redux
                     }                    
