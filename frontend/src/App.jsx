@@ -19,8 +19,6 @@ export default function App(){
     const [resultsWishListBtn,setResultsWishListBtn] = useState(true)
     const [showDetails,setShowDetails] = useState(false)
 
-    console.log(showDetails)
-
     const [searched,setSearched] = useState("NO")
 
 

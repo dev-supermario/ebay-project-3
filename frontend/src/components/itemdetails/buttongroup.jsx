@@ -12,8 +12,17 @@ export const ButtonGroup = ({ item,setShowDetails }) => {
                     </button>
                 </div>
                 <div className="w-100 text-end">
-                    <button className="btn btn-light p-0" 
+                    <button 
+                        className="btn btn-light p-0" 
                         type="button"
+                        onClick={()=>{
+                            console.log("click")
+                            window.FB.ui({
+                                method: 'share',
+                                href: item.itemURL,
+                              }, ()=>{console.log("shared")});
+                        }}
+
                     ><img className="img-fluid" style={{width:"40px"}} src={FacebookIcon} /></button>
                     <WishListBtn item={item}/>
                 </div>
