@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRequest } from "../../utils/requests";
+import { Zipcode } from "./zipcode";
 
 
 export const LocationGroup = (props) => {
 
-    const { fetchIp } = useRequest()
+    const { fetchIp,getZipcodes } = useRequest()
     const [IP,setIP] = useState("")
     const currentLocationRef = useRef(null)
+    const [zipcodes,setZipcodes] = useState([])
 
     useEffect(() => {
         fetchIp()
@@ -66,8 +68,34 @@ export const LocationGroup = (props) => {
                         onChange={(e)=>{
                             props.setZipcodeText(e.target.value)
                             props.setZipcodeInput(e.target.value)
+                            getZipcodes(props.zipcodeInput)
+                            .then((res) => setZipcodes(res))
                         }}
                     />
+                    {
+                        zipcodes.length != 0 && props.zipcodeInput?
+                        <>
+                            <div 
+                                className="shadow border border-1 rounded-bottom bg-white text-black w-100 px-12 py-10" 
+                                style={{
+                                    position:"absolute",
+                                    minWidth:"300px",
+                                    maxWidth:"480px",
+                                    zIndex:"1"
+
+                                }} 
+                            >
+                                {
+                                    zipcodes.map(zipcode => 
+                                        <Zipcode key={String(zipcode)} text={zipcode} setZipcodeText={props.setZipcodeText} setZipcodeInput={props.setZipcodeInput} setZipcodes={setZipcodes}  />   
+                                    )
+                                }
+
+                            </div>
+                        </>
+                        :
+                        <></>
+                    }
                 </div>
             </div>
         </>

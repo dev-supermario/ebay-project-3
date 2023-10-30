@@ -146,7 +146,7 @@ router.get('/getSimilarProducts',(req,res)=>{
 
     axios.get(URL,config)
     .then(res => res.data)
-    .then(data => res.status(200).send(data))
+    .then(data => res.status(200).send(data.getSimilarItemsResponse.itemRecommendations.item))
     .catch(error => res.status(400).send(error))
 })
 

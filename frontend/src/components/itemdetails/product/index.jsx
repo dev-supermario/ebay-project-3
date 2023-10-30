@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { Attribute } from "./attribute"
-import { Carousel } from "./carousel"
+import CustomCarousel from "./carousel"
 
 export const ProductTab = ({ item }) => {
-    console.log(item)
+    // console.log(item)
     const itemSpecifics = item.itemSpecifics
     const [viewPhotos,setViewPhotos] = useState(false)
 
@@ -21,7 +21,8 @@ export const ProductTab = ({ item }) => {
                 {
                     viewPhotos ?
                     <>
-                        <Carousel URLs={item.images} setCarouselView={setViewPhotos}/>
+                        {/* <Carousel URLs={item.images} setCarouselView={setViewPhotos}/> */}
+                        <CustomCarousel URLs={item.images} setCarouselView={setViewPhotos}/>
                     </>
                     :
                     <>

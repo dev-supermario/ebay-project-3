@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import ButtonGroup from './buttongroup';
 import { LocationGroup } from './location';
 import { useRequest } from '../../utils/requests';
+import { AppContext } from '../../utils/context';
 
 
 
 
-export default function Form({ setSearched }){
+export default function Form({ setSearched,setResultsWishListBtn }){
 
+    const context = useContext(AppContext)
+    const setShowDetails = context.enableShow
     const { handleSearch } = useRequest()
     const [keyword,setKeyword] = useState("")
     const [categoryOptions,setCategoryOptions] = useState("AllCategories")
@@ -33,7 +36,10 @@ export default function Form({ setSearched }){
         setDistance("10")
         setCurrentLocationOrManual(true)
         setZipcodeInput("")
+        setShowDetails(false)
+        setResultsWishListBtn(true)
     }
+
 
 
     return(

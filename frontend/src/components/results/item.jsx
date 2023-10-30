@@ -47,7 +47,6 @@ export const Item = (props) => {
                     setBackgroundColor((props.index%2==0) ? "#212529":"#282a2e")
                 }}
                 onClick={()=>{
-                    console.log("click")
                     setItemDetails(currItem)
                 }}
                 >

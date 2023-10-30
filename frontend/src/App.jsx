@@ -19,6 +19,8 @@ export default function App(){
     const [resultsWishListBtn,setResultsWishListBtn] = useState(true)
     const [showDetails,setShowDetails] = useState(false)
 
+    console.log(showDetails)
+
     const [searched,setSearched] = useState("NO")
 
 
@@ -54,10 +56,6 @@ export default function App(){
                     },
                     show : showDetails,
                     enableShow : setShowDetails,
-                    // item : {
-                    //     data : itemDetails,
-                    //     setData : setItemDetails,
-                    // },
                     item : {
                         favourite : {
                             data: favouriteDetails,
@@ -74,6 +72,7 @@ export default function App(){
                 >
                         <SearchPage
                             setSearched={setSearched}
+                            setResultsWishListBtn={setResultsWishListBtn}
                         />
                         <Spacer horizontalSpacing={0} verticalSpacing={10} />
                         <TabsContainer 
@@ -89,7 +88,7 @@ export default function App(){
                         }
                 </div>
                 {
-                    (results || favourites) && !showDetails ?
+                    (results.length>0 || favourites.length>0) && !showDetails ?
                     <>
                         {
                             resultsWishListBtn ?

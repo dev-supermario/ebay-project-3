@@ -23,12 +23,15 @@ export default function ButtonGroup(props){
                         },1000)
                     }}
                 ><SearchIcon/>Search</button>
+
                 <button className="btn btn-light ms-35"
                     type="button"
                     onClick={()=>{
+                        console.log("click")
                         props.handleClearClick()
                         context.search.setResults([])
                         props.setSearched("NO")
+                        
                     }}
                 ><ClearAllIcon/>Clear</button>
             </div>

@@ -121,7 +121,44 @@ export const useRequest = () => {
 
   }
 
-  return { handleSearch,getItemDetails ,fetchIp, addToFavourites, removeFromFavourites, getAllFavourites, getPhotos }
+  const getSimilarProducts = async (params) => {
+    let URL = "http://localhost:3001/shopping/getSimilarProducts?"
+
+    URL += `itemID=${params.id}`
+
+    const config = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }
+
+    const response = await fetch(URL,config)
+    return response.json()
+
+  }
+
+  const getZipcodes = async (keyword) => {
+
+    console.log(keyword)
+    let URL = "http://localhost:3001/utils/getZipcodes?"
+
+    URL += `keyword=${keyword}`
+
+    const config = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }
+
+    const response = await fetch(URL,config)
+    return response.json()
+
+
+  }
+
+  return { handleSearch,getItemDetails ,fetchIp, addToFavourites, removeFromFavourites, getAllFavourites, getPhotos, getSimilarProducts, getZipcodes }
 
 }
 

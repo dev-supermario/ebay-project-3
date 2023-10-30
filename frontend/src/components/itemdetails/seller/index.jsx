@@ -41,7 +41,7 @@ export const Seller = ({ item,itemURL }) => {
                 }
                 <Attribute name="Buy Product At" value={
                     <>
-                        <a href={itemURL} className="m-0" style={{color:"#72989a",cursor:"pointer",textDecoration:"none"}}
+                        <a href={itemURL} target="_blank" rel="noreferrer" className="m-0" style={{color:"#72989a",cursor:"pointer",textDecoration:"none"}}
                         >Store</a>
                     </>
                 } />

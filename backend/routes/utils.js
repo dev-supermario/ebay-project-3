@@ -8,7 +8,7 @@ router.get("/getZipcodes",(req,res)=>{
     const keyword = req.query.keyword
     const username = process.env.GEO_USERNAME
     const URL = `http://api.geonames.org/postalCodeSearchJSON?postalcode_startsWith=${keyword}&maxRows=5&username=${username}&country=US`
-    console.log(URL)
+    // console.log(URL)
     const config = {
         headers: {
             'Content-Type': 'application/json'
