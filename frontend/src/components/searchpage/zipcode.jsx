@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-export const Zipcode = ({ text,setZipcodeText,setZipcodeInput,setZipcodes }) => {
+export const Zipcode = ({ text,setZipcodeText,setZipcodeInput,setZipcodes,setSelected }) => {
     const [backgroundColor,setBackgroundColor] = useState("white")
 
     return(
@@ -14,7 +14,7 @@ export const Zipcode = ({ text,setZipcodeText,setZipcodeInput,setZipcodes }) => 
                     setZipcodeText(e.target.textContent)
                     setZipcodeInput(e.target.textContent)
                     setZipcodes([])
-
+                    setSelected(true)
                 }}
             >{text}</p>
         </>

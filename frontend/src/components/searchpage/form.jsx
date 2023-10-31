@@ -23,6 +23,8 @@ export default function Form({ setSearched,setResultsWishListBtn }){
     const [currentLocationOrManual,setCurrentLocationOrManual] = useState(true)
     const [zipcodeText,setZipcodeText] = useState("")
     const [zipcodeInput,setZipcodeInput] = useState("")
+    const [selected,setSelected] = useState(false)
+
 
 
     const handleClearClick = ()=>{
@@ -38,6 +40,15 @@ export default function Form({ setSearched,setResultsWishListBtn }){
         setZipcodeInput("")
         setShowDetails(false)
         setResultsWishListBtn(true)
+    }
+
+    const validateForm = () => {
+        if(parseFloat(distance)<0){
+            alert("Distance cannot be negative")
+            return false
+        }
+
+        return true
     }
 
 
@@ -144,12 +155,15 @@ export default function Form({ setSearched,setResultsWishListBtn }){
                     zipcodeText={zipcodeText}
                     setZipcodeText={setZipcodeText}
                     zipcodeInput={zipcodeInput}
+                    selected={selected}
+                    setSelected={setSelected}
                     setZipcodeInput={setZipcodeInput}
                 />
                 <ButtonGroup 
                     handleClearClick={handleClearClick}
                     searchDisabled = {keyword==""}
-                    setSearched={setSearched} 
+                    setSearched={setSearched}
+                    validateForm={validateForm}
                     handleSearch={handleSearch(
                         {
                             keyword,

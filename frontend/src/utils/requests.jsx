@@ -153,7 +153,7 @@ export const useRequest = () => {
     }
 
     const response = await fetch(URL,config)
-    return response.json()
+    return response
 
 
   }

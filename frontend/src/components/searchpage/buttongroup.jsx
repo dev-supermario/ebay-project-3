@@ -16,11 +16,13 @@ export default function ButtonGroup(props){
                     disabled={props.searchDisabled}
                     onClick={async ()=>{
                         const data = await props.handleSearch()
-                        props.setSearched("PENDING")
-                        setTimeout(()=>{
-                            context.search.setResults(data)
-                            props.setSearched("YES")
-                        },1000)
+                        if(props.validateForm()){
+                            props.setSearched("PENDING")
+                            setTimeout(()=>{
+                                context.search.setResults(data)
+                                props.setSearched("YES")
+                            },1000)
+                        }
                     }}
                 ><SearchIcon/>Search</button>
 

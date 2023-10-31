@@ -9,12 +9,25 @@ export const LocationGroup = (props) => {
     const [IP,setIP] = useState("")
     const currentLocationRef = useRef(null)
     const [zipcodes,setZipcodes] = useState([])
+    console.log(zipcodes)
 
     useEffect(() => {
         fetchIp()
         .then(data => setIP(data.ip))
         .then(()=>fetchLocation())
-    }, []);
+    }, [props.currentLocationOrManual]);
+
+    useEffect(()=>{
+        if(props.zipcodeInput.length<5){
+            props.setSelected(false)
+        }
+        if(!props.currentLocationOrManual && !props.selected){
+            console.log("get zip")
+            getZipcodes(props.zipcodeInput)
+            .then((res) => res.json())
+            .then(res => setZipcodes(res))
+        }
+    },[props.zipcodeInput])
 
     const fetchLocation = useCallback(async () => {
         if(currentLocationRef.current.checked){
@@ -68,15 +81,13 @@ export const LocationGroup = (props) => {
                         onChange={(e)=>{
                             props.setZipcodeText(e.target.value)
                             props.setZipcodeInput(e.target.value)
-                            getZipcodes(props.zipcodeInput)
-                            .then((res) => setZipcodes(res))
                         }}
                     />
                     {
-                        zipcodes.length != 0 && props.zipcodeInput?
+                        zipcodes.length > 0 && props.zipcodeInput?
                         <>
                             <div 
-                                className="shadow border border-1 rounded-bottom bg-white text-black w-100 px-12 py-10" 
+                                className="shadow border border-1 rounded-bottom bg-white text-black w-100 px-12 pt-10" 
                                 style={{
                                     position:"absolute",
                                     minWidth:"300px",
@@ -87,7 +98,13 @@ export const LocationGroup = (props) => {
                             >
                                 {
                                     zipcodes.map(zipcode => 
-                                        <Zipcode key={String(zipcode)} text={zipcode} setZipcodeText={props.setZipcodeText} setZipcodeInput={props.setZipcodeInput} setZipcodes={setZipcodes}  />   
+                                        <Zipcode key={String(zipcode)} 
+                                            text={zipcode} 
+                                            setZipcodeText={props.setZipcodeText} 
+                                            setZipcodeInput={props.setZipcodeInput} 
+                                            setZipcodes={setZipcodes}
+                                            setSelected={props.setSelected}  
+                                        />   
                                     )
                                 }
 
