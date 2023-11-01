@@ -22,17 +22,16 @@ export default function App(){
     const [searched,setSearched] = useState("NO")
 
 
-    // ITEM DETAILS BASED ON TYPE
-    const [favouriteDetails,setFavouriteDetails] = useState(null)
-    const [resultDetails,setResultDetails] = useState(null)
-
     // LIST OF ITEMS BASED ON TYPE 
     const [results,setResults] = useState([])
     const [favourites,setFavourites] = useState([])
 
-    // console.log(favourites)
+    // ITEM DETAILS BASED ON TYPE
+    const [favouriteDetails,setFavouriteDetails] = useState(state => favourites.length==0 ? null : state)
+    const [resultDetails,setResultDetails] = useState(null)
 
     useEffect(()=>{
+        console.log("fetching")
         getAllFavourites()
         .then(res => {
             // console.log(res)

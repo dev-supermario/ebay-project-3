@@ -8,27 +8,28 @@ export const Pagination = ({ count,currentPage,setCurrentPage }) => {
         for (let index = 1; index <= noOfPages; index++) {
             pages.push(
                 <>
-                    <button 
-                        className="border-0" 
+                    <button
+                        key={index} 
+                        className="border-0 pagination-no-btn" 
                         style={{
                             backgroundColor:(currentPage+1==index ? "#229be3":"white"),
 
                         }} 
                         onClick={()=> setCurrentPage(index-1)}
-                        onMouseEnter={(e)=>{
-                            if(currentPage+1!=index){
-                                const target = e.target
-                                target.style.backgroundColor = "lightgray"
-                                target.style.textDecoration = "underline"
-                            }
-                        }}
-                        onMouseLeave={(e)=>{
-                            if(currentPage+1!=index){
-                                const target = e.target
-                                target.style.backgroundColor = "white"
-                                target.style.textDecoration = ""
-                            }
-                        }}
+                        // onMouseEnter={(e)=>{
+                        //     if(currentPage+1!=index){
+                        //         const target = e.target
+                        //         target.style.backgroundColor = "lightgray"
+                        //         target.style.textDecoration = "underline"
+                        //     }
+                        // }}
+                        // onMouseLeave={(e)=>{
+                        //     if(currentPage+1!=index){
+                        //         const target = e.target
+                        //         target.style.backgroundColor = "white"
+                        //         target.style.textDecoration = ""
+                        //     }
+                        // }}
                     >
                         {index}
                     </button>
@@ -44,41 +45,43 @@ export const Pagination = ({ count,currentPage,setCurrentPage }) => {
                 noOfPages > 1 ?
                 <>
                     <div className="d-flex mt-10">
-                        <button 
-                            className="border-0" 
+                        <button
+                            key={String(0)} 
+                            className="border-0 pagination-btn" 
                             disabled={currentPage<1 || noOfPages==1} 
                             onClick={()=>setCurrentPage(state => state - 1)}
-                            onMouseEnter={(e)=>{
+                            // onMouseEnter={(e)=>{
                                 
-                                    const target = e.target
-                                    target.style.backgroundColor = "lightgray"
-                                    target.style.textDecoration = "underline"
-                            }}
-                            onMouseLeave={(e)=>{
-                                    const target = e.target
-                                    target.style.backgroundColor = "white"
-                                    target.style.textDecoration = ""
-                            }}
+                            //         const target = e.target
+                            //         target.style.backgroundColor = "lightgray"
+                            //         target.style.textDecoration = "underline"
+                            // }}
+                            // onMouseLeave={(e)=>{
+                            //         const target = e.target
+                            //         target.style.backgroundColor = "white"
+                            //         target.style.textDecoration = ""
+                            // }}
                         >
                                 &laquo;  Previous
-                            </button>
+                        </button>
                             {
                                 renderPageNos()
                             }
-                        <button 
-                            className="border-0" 
+                        <button
+                            key={String(noOfPages+1)} 
+                            className="border-0 pagination-btn" 
                             disabled={currentPage==noOfPages-1 || noOfPages==1} 
                             onClick={()=>setCurrentPage(state => state + 1)}
-                            onMouseEnter={(e)=>{
-                                const target = e.target
-                                target.style.backgroundColor = "lightgray"
-                                target.style.textDecoration = "underline"
-                            }}
-                            onMouseLeave={(e)=>{
-                                    const target = e.target
-                                    target.style.backgroundColor = "white"
-                                    target.style.textDecoration = ""
-                            }}
+                            // onMouseEnter={(e)=>{
+                            //     const target = e.target
+                            //     target.style.backgroundColor = "lightgray"
+                            //     target.style.textDecoration = "underline"
+                            // }}
+                            // onMouseLeave={(e)=>{
+                            //         const target = e.target
+                            //         target.style.backgroundColor = "white"
+                            //         target.style.textDecoration = ""
+                            // }}
                         >Next   &raquo;
                         </button>
                     </div>

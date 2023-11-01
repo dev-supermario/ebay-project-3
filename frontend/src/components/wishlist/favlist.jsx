@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useMemo, useState } from "react"
 import { AppContext } from "../../utils/context"
 import { Item } from "./favourite"
 import { Pagination } from "../extras/pagination"
@@ -7,25 +7,13 @@ import { Pagination } from "../extras/pagination"
 export const FavouritesList = ()=>{
 
     const context = useContext(AppContext)
-    // const count = resultContext.data["@count"]
-    const favourites = context.favourites.data ? context.favourites.data : []
+    const favourites = useMemo(() => context.favourites.data ? context.favourites.data : [],[context.favourites.data])
+
+    
     const [currentPage,setCurrentPage] = useState(0)
     let totalPrice = 0;
+
     const paginatedFavourites = favourites.map((item,index) =>{
-
-        // const itemDetails = {
-        //     id: item._id, 
-        //     itemURL: item.itemURL,
-        //     title : item.title,
-        //     imageURL : item.imageURL,
-        //     price : item.price,
-        //     shippingType : item.shippingType,
-        //     zipcode : item.postalCode[0],
-        //     shippingInfo: item.shippingInfo,
-        //     sellerInfo: item.sellerInfo
-        // }
-
-
         totalPrice += parseFloat(item.price)
         return(
             <>
@@ -50,7 +38,8 @@ export const FavouritesList = ()=>{
                         borderBottom:"2px solid #2a2e34"
                     }}>
                         <p className="text-center ps-sm-20 pe-sm-60" style={{
-                            minWidth:"40px"
+                            minWidth:"40px",
+                            maxWidth:"40px"
                         }}>#</p>
                         <p className="me-20 me-sm-60" style={{
                                 minWidth:"120px",
@@ -68,7 +57,7 @@ export const FavouritesList = ()=>{
                     }
                     <div key={`${favourites.length+1}`} className="d-flex pt-10 w-100 ps-670">
                         <p className="text-wrap me-30 me-sm-80 ms-sm-270" style={{minWidth:"100px",maxWidth:"100px"}}>Total Shopping</p>
-                        <p className="ps-10 ms-sm-30">${totalPrice}</p>
+                        <p className="ps-10 ms-sm-30">${totalPrice.toFixed(2)}</p>
                     </div>
                 </div>
                 <Pagination count={favourites.length} currentPage={currentPage} setCurrentPage={setCurrentPage} />

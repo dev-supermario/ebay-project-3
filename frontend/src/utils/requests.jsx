@@ -5,7 +5,8 @@ export const useRequest = () => {
 
   const handleSearch = (params) => async () => {
   
-      let URL = "http://localhost:3001/shopping/getItems?itemsPerPage=50"
+      // let URL = "http://localhost:3001/shopping/getItems?itemsPerPage=50"
+      let URL = "https://csci571-hw3-403803.wl.r.appspot.com/shopping/getItems?itemsPerPage=50"
   
       if(params.keyword) URL += `&keyword=${params.keyword}`
       if(params.zipcodeText) URL += `&buyerZipcode=${params.zipcodeText}`
@@ -31,7 +32,8 @@ export const useRequest = () => {
   const getItemDetails = async (params) => {
 
 
-      let URL = `http://localhost:3001/shopping/getSingleItem?itemID=${params.id}&needDescription=true`
+      // let URL = `http://localhost:3001/shopping/getSingleItem?itemID=${params.id}&needDescription=true`
+      let URL = `https://csci571-hw3-403803.wl.r.appspot.com/shopping/getSingleItem?itemID=${params.id}&needDescription=true`
 
       const config = {
         method: "GET",
@@ -57,7 +59,8 @@ export const useRequest = () => {
   
   const addToFavourites = async (params) => {
     console.log("added to favourites")
-    let URL = "http://localhost:3001/favourites/add?"
+    // let URL = "http://localhost:3001/favourites/add?"
+    let URL = "https://csci571-hw3-403803.wl.r.appspot.com/favourites/add?"
     const config = {
       method: 'POST',
       headers: {
@@ -74,7 +77,8 @@ export const useRequest = () => {
   }
   
   const getAllFavourites = async () =>{
-    let URL = "http://localhost:3001/favourites/getAll"
+    // let URL = "http://localhost:3001/favourites/getAll"
+    let URL = "https://csci571-hw3-403803.wl.r.appspot.com/favourites/getAll"
     const response = await fetch(URL)
     const data = await response.json()
     return data
@@ -83,8 +87,14 @@ export const useRequest = () => {
   const removeFromFavourites = async (params) => {
     console.log(params)
     console.log("removed from favourites")
-    let URL = "http://localhost:3001/favourites/remove?"
-    if(params.id) URL += `id=${params.id}`
+    // let URL = "http://localhost:3001/favourites/remove?"
+    let URL = "https://csci571-hw3-403803.wl.r.appspot.com/favourites/remove?"
+
+
+    let id = params.id ? params.id : params["_id"]
+    console.log(id)
+
+    URL += `id=${id}`
   
     const config = {
       method: "DELETE",
@@ -103,7 +113,8 @@ export const useRequest = () => {
   const getPhotos = async (params) => {
 
     console.log("get photos")
-    let URL = "http://localhost:3001/utils/getPhotos"
+    // let URL = "http://localhost:3001/utils/getPhotos"
+    let URL = "https://csci571-hw3-403803.wl.r.appspot.com/utils/getPhotos"
     if(params.keyword) URL += `?keyword=${params.keyword}`
 
     // console.log(URL)
@@ -122,7 +133,8 @@ export const useRequest = () => {
   }
 
   const getSimilarProducts = async (params) => {
-    let URL = "http://localhost:3001/shopping/getSimilarProducts?"
+    // let URL = "http://localhost:3001/shopping/getSimilarProducts?"
+    let URL = "https://csci571-hw3-403803.wl.r.appspot.com/shopping/getSimilarProducts?"
 
     URL += `itemID=${params.id}`
 
@@ -141,7 +153,8 @@ export const useRequest = () => {
   const getZipcodes = async (keyword) => {
 
     console.log(keyword)
-    let URL = "http://localhost:3001/utils/getZipcodes?"
+    // let URL = "http://localhost:3001/utils/getZipcodes?"
+    let URL = "https://csci571-hw3-403803.wl.r.appspot.com/utils/getZipcodes?"
 
     URL += `keyword=${keyword}`
 

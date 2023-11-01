@@ -1,6 +1,6 @@
 import express from "express"
 import axios from "axios"
-import { client } from "../utils/dbconnect"
+import { client } from "../utils/dbconnect.js"
 
 
 const router = express.Router()

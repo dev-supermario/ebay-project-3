@@ -33,45 +33,56 @@ export const Item = (props) => {
 
     return(
         <>
-            <div className="d-flex py-15" style={{
-                    minWidth:"100%",
-                    width: "fit-content",
-                    backgroundColor:backgroundColor,
-                    borderBottom:"2px solid #2a2e34"
-                }}
+            {
+                currItem ?
+                <>
+                    <div className="d-flex py-15" style={{
+                            minWidth:"100%",
+                            width: "fit-content",
+                            backgroundColor:backgroundColor,
+                            borderBottom:"2px solid #2a2e34"
+                        }}
 
-                onMouseEnter={()=>{
-                    setBackgroundColor("#2c2e32")
-                }}
-                onMouseLeave={()=>{
-                    setBackgroundColor((props.index%2==0) ? "#212529":"#282a2e")
-                }}
-                onClick={()=>{
-                    setItemDetails(currItem)
-                }}
-                >
-                    
-                <p className="text-center ps-sm-20 pe-sm-60" style={{
-                    minWidth:"40px"
-                }}>{props.index}</p>
-                
-                <ItemImage imageURL = {props.item.imageURL} />
+                        onMouseEnter={()=>{
+                            setBackgroundColor("#2c2e32")
+                        }}
+                        onMouseLeave={()=>
+                            setBackgroundColor((props.index%2==0) ? "#212529":"#282a2e")
+                        }
+                        onClick={()=>{
+                            setItemDetails(currItem)
+                        }}
+                        >
+                            
+                        <p className="text-center ps-sm-20 pe-sm-60" style={{
+                            minWidth:"40px",
+                            maxWidth:"40px"
+                        }}>{props.index}</p>
+                        
+                        <ItemImage imageURL = {props.item.imageURL} />
 
-                <p className="ps-10 text-truncate me-sm-80" style={{minWidth:"380px",maxWidth:"380px",textDecoration:"none",color:"#1657b4",cursor:"pointer"}} onClick={()=> {
-                    setItemDetails(currItem)
-                    enableShowDetailsBtn(true)
-                }} >{props.item.title}</p>
-                
-                <p className="ps-20 me-sm-50" style={{minWidth:"90px"}}>${props.item.price}</p>
-                <p className="text-wrap me-sm-40" style={{minWidth:"130px",maxWidth:"130px"}}>{props.item.shippingType} Shipping</p>
-                <p className="me-sm-30" style={{minWidth:"70px",maxWidth:"70px"}}>{props.item.zipcode}</p>
+                        <p className="ps-10 me-sm-80 custom-tooltip" style={{minWidth:"380px",maxWidth:"380px",maxHeight:"20px",textDecoration:"none",color:"#1657b4",cursor:"pointer"}} onClick={()=> {
+                            setItemDetails(currItem)
+                            enableShowDetailsBtn(true)
+                        }} >
+                            {currItem.title.length > 35 ? props.item.title.slice(0,35) + " ..." : props.item.title}
+                            <span className="custom-tooltiptext">{props.item.title}</span>
+                        </p>
+                        
+                        <p className="ps-20 me-sm-50" style={{minWidth:"90px"}}>${props.item.price}</p>
+                        <p className="text-wrap me-sm-40" style={{minWidth:"130px",maxWidth:"130px"}}>{props.item.shippingType} Shipping</p>
+                        <p className="me-sm-30" style={{minWidth:"70px",maxWidth:"70px"}}>{props.item.zipcode}</p>
 
-                <div className="" style={{minWidth:"80px"}}>
-                    <WishListBtn
-                        item = {currItem}
-                    />
-                </div>
-            </div>
+                        <div className="ps-10 pe-20" style={{minWidth:"80px"}}>
+                            <WishListBtn
+                                item = {currItem}
+                            />
+                        </div>
+                    </div>
+                </>
+                :
+                <></>
+            }
         </>
     )
 }

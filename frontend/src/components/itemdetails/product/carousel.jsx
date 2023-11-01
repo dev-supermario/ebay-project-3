@@ -1,6 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import KeyboardArrowLeftTwoToneIcon from '@mui/icons-material/KeyboardArrowLeftTwoTone';
+import KeyboardArrowRightTwoToneIcon from '@mui/icons-material/KeyboardArrowRightTwoTone';
 import { useState } from 'react';
 
 
@@ -24,8 +24,9 @@ function CustomCarousel({ URLs,setCarouselView }) {
                 alignItems:"center",
             }}>
             <div className="bg-white rounded" style={{
-                    minWidth:"320px",
-                    maxWidth:"500px"
+                    // minWidth:"320px",
+                    // maxWidth:"600px",
+                    // paddingBottom:"1%"
                 }} 
                     >
                 <div className='w-100 d-flex justify-content-between px-20 pt-20'>
@@ -33,24 +34,36 @@ function CustomCarousel({ URLs,setCarouselView }) {
                     <button type="button" className="btn-close" aria-label="Close" onClick={()=>{setCarouselView(false)}} />
                 </div>
                 <hr className='border border-secondary m-0' />
-                <Carousel 
+                <Carousel
+                className='custom-carousel' 
                     controls 
                     slide 
                     touch 
                     indicators={false}
-                    prevIcon={<div ><ArrowBackIosIcon htmlColor='gray' onClick={()=>setItemIndex(state => state > 0 ? state - 1 : 0)}/></div>}
-                    nextIcon={<div><ArrowForwardIosIcon htmlColor='gray' onClick={()=>setItemIndex(state => state < URLs.length - 1 ? state + 1 : URLs.length - 1)} /></div>}
+                    prevIcon={<div ><KeyboardArrowLeftTwoToneIcon htmlColor='white' style={{backgroundColor:"#757575"}} onClick={()=>setItemIndex(state => state > 0 ? state - 1 : 0)}/></div>}
+                    nextIcon={<div><KeyboardArrowRightTwoToneIcon htmlColor='white' style={{backgroundColor:"#757575"}} onClick={()=>setItemIndex(state => state < URLs.length - 1 ? state + 1 : URLs.length - 1)} /></div>}
                 >
                     {
                         URLs.map((url,index)=>
                             <>
                                 <Carousel.Item key={index} 
-                                    style={{padding:"20px 30px 20px 20px"}} 
+                                    style={{
+                                        width:"100%",
+                                        position:"relative",
+                                        overflow:"hidden",
+                                        paddingBottom:"100%",
+                                        paddingLeft:"1%",
+                                        paddingRight:"1%"
+                                    }} 
                                     className={itemIndex==index ? "active" : ""}>
                                     <img 
                                         style={{
-                                            display:"inline-block",
-                                            border:"12px solid rgba(33,37,41)"
+                                            position:"absolute",
+                                            maxWidth: "100%",
+                                            maxHeight: "100%",
+                                            top: "50%",
+                                            // left: "50%",
+                                            transform:"translateX(-50%) translateY(-50%)"
                                         }}  
                                         className='img-fluid' src={url} />
                                 </Carousel.Item>

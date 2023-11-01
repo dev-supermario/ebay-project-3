@@ -7,15 +7,15 @@ import { Pagination } from "../extras/pagination"
 export const ItemList = ()=>{
 
     const context = useContext(AppContext)
-    const count = context.search.results["@count"]
-    const items = context.search.results ? context.search.results.item : null
+    const items = context.search.results ? context.search.results : []
     const [currentPage,setCurrentPage] = useState(0)
+    // console.log(items)
     const paginatedItems = items.map((item,index) => {
             const itemDetails = {
                 id: item.itemId[0], 
                 itemURL: item.viewItemURL[0],
                 title : item.title[0],
-                imageURL : item.galleryURL[0],
+                imageURL : item.galleryURL ? item.galleryURL[0]  : "https://csci571.com/hw/hw6/images/ebay_default.jpg",
                 price : item.sellingStatus[0].currentPrice[0]["__value__"],
                 shippingType : item.shippingInfo[0].shippingType[0],
                 zipcode : item.postalCode[0],
@@ -27,7 +27,7 @@ export const ItemList = ()=>{
             return(
                 <>
                     <Item 
-                        key={item.itemId[0]}
+                        key={String(item.itemId[0])}
                         index = {index+1}
                         item = {itemDetails}
                     />
@@ -39,14 +39,15 @@ export const ItemList = ()=>{
     return(
         <>
            {
-            items ?
+            items.length > 0 ?
             <>
                 <div className="bg-dark text-white w-100 overflow-auto text-nowrap">
-                    <div className="d-flex fw-bold pt-10 w-100" style={{
+                    <div key={0} className="d-flex fw-bold pt-10 w-100" style={{
                         borderBottom:"2px solid #2a2e34"
                     }}>
                         <p className="text-center ps-sm-20 pe-sm-60" style={{
-                            minWidth:"40px"
+                            minWidth:"40px",
+                            maxWidth:"40px"
                         }}>#</p>
                         <p className="me-20 me-sm-60" style={{
                                 minWidth:"120px",
@@ -65,7 +66,7 @@ export const ItemList = ()=>{
                     }
                     
                 </div>
-                <Pagination count={count} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                <Pagination count={items.length} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </>
             :
             <>

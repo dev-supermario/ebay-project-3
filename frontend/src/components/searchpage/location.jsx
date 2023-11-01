@@ -9,7 +9,6 @@ export const LocationGroup = (props) => {
     const [IP,setIP] = useState("")
     const currentLocationRef = useRef(null)
     const [zipcodes,setZipcodes] = useState([])
-    console.log(zipcodes)
 
     useEffect(() => {
         fetchIp()

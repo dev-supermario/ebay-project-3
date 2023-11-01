@@ -1,0 +1,79 @@
+/* custom-tooltip container */
+.custom-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* custom-tooltip text */
+.custom-tooltip .custom-tooltiptext {
+  visibility: hidden;
+  text-wrap: wrap;
+  width: 190px;
+  background-color: #3d3d3d;
+  color: #fff;
+  text-align: center;
+  padding: 5px 5px;
+  border-radius: 6px;
+
+  /* Position the custom-tooltip text */
+  position: absolute;
+  z-index: 1;
+  top: 125%;
+  left: 25%;
+  margin-left: -60px;
+
+  /* Fade in custom-tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.custom-tooltip .custom-tooltiptext::after {
+  /* content: ""; */
+  position: absolute;
+  top: 100%;
+  left: 20%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.custom-tooltip:hover .custom-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.custom-carousel{
+  min-width: 380px;
+  min-height: 380px;
+}
+
+.pagination-btn{
+  background-color: white;
+  text-decoration: none;
+}
+
+.pagination-btn:hover:not([disabled]){
+  background-color: lightgray;
+  text-decoration: underline;
+}
+
+.pagination-no-btn{
+  background-color: white;
+  text-decoration: none;
+}
+
+.pagination-no-btn:hover{
+  background-color: lightgray;
+  text-decoration: underline;
+}
+.pagination-no-btn:focus{
+  background-color: #229be3;
+}
+
+@media screen and (min-width: 992px) {
+  .custom-carousel{
+    min-width: 600px;
+    min-height: 600px;
+  }
+}
