@@ -77,3 +77,15 @@
     min-height: 600px;
   }
 }
+
+.item[data-type="odd"],.favourite[data-type="odd"]{
+  background-color: #282a2e;
+}
+
+.item[data-type="even"],.favourite[data-type="even"]{
+  background-color: #212529;
+}
+
+.item:hover, .favourite:hover {
+  background-color: #2c2e32;
+}

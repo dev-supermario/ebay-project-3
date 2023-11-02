@@ -8,7 +8,7 @@ export const FavouritesList = ()=>{
 
     const context = useContext(AppContext)
     const favourites = useMemo(() => context.favourites.data ? context.favourites.data : [],[context.favourites.data])
-
+    const [selected,setSelected] = useState(0)
     
     const [currentPage,setCurrentPage] = useState(0)
     let totalPrice = 0;
@@ -22,6 +22,8 @@ export const FavouritesList = ()=>{
                     id = {item._id} 
                     index = {index+1}
                     item = {item}
+                    selected={selected}
+                    setSelected={setSelected}
                 />
             </>
         )

@@ -8,12 +8,13 @@ import { AppContext } from "../../utils/context"
 
 export const Item = (props) => {
 
-    const [backgroundColor,setBackgroundColor] = useState((props.index%2==0) ? "#212529":"#282a2e")
     const { getItemDetails } = useRequest()
     const context = useContext(AppContext)
     const setItemDetails = context.item.results.setData
-    // const resultItemData = context.item.results.data
+    const data = context.item.results.data
     const enableShowDetailsBtn = context.enableShow
+
+    console.log(data)
 
     const [currItem,setCurrItem] = useState(null)
 
@@ -29,29 +30,26 @@ export const Item = (props) => {
                 storeInfo : res.Storefront ? res.Storefront : ""
             })
         })
-    },[])
+    },[props.selected])
 
     return(
         <>
             {
                 currItem ?
                 <>
-                    <div className="d-flex py-15" style={{
-                            minWidth:"100%",
-                            width: "fit-content",
-                            backgroundColor:backgroundColor,
-                            borderBottom:"2px solid #2a2e34"
-                        }}
+                    <div className="d-flex py-15 item" data-type={(props.index%2==0) ? "even" : "odd"} style={{
+                                minWidth:"100%",
+                                width: "fit-content",
+                                borderBottom:"2px solid #2a2e34",
+                                backgroundColor : (props.selected == props.index || data.id == props.id ? "#b0b2b6" : "")
 
-                        onMouseEnter={()=>{
-                            setBackgroundColor("#2c2e32")
-                        }}
-                        onMouseLeave={()=>
-                            setBackgroundColor((props.index%2==0) ? "#212529":"#282a2e")
-                        }
-                        onClick={()=>{
-                            setItemDetails(currItem)
-                        }}
+                            }}
+
+                            onClick={()=>{
+                                console.log("click")
+                                setItemDetails(currItem)
+                                props.setSelected(props.index)
+                            }}
                         >
                             
                         <p className="text-center ps-sm-20 pe-sm-60" style={{

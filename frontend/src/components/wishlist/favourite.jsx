@@ -1,16 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import { WishListBtn } from '../extras/wishlistbtn';
 import { ItemImage } from '../extras/itemimage';
-// import { useRequest } from '../../utils/requests';
 import { AppContext } from '../../utils/context';
 
 
 export const Item = (props) => {
 
     const context = useContext(AppContext)
-    const [backgroundColor,setBackgroundColor] = useState(props.selectedItem == props.index ? "#b0b2b6" : (props.index%2==0) ? "#212529":"#282a2e")
     const setItemDetails = context.item.favourite.setData
+    const data = context.item.favourite.data
     const enableShowDetailsBtn = context.enableShow
+
+    console.log(props.id)
+    console.log(data)
 
     const [currItem,setCurrItem] = useState(null)
 
@@ -27,24 +29,18 @@ export const Item = (props) => {
             {
                 currItem ?
                 <>
-                    <div className="d-flex py-15" style={{
-                    minWidth:"100%",
-                    width: "fit-content",
-                    backgroundColor:backgroundColor,
-                    borderBottom:"2px solid #2a2e34"
-                        }}
+                    <div className="d-flex py-15 favourite" data-type={(props.index%2==0) ? "even" : "odd"} style={{
+                        minWidth:"100%",
+                        width: "fit-content",
+                        backgroundColor: (props.selected == props.index || data["_id"] == props.id) ? "#b0b2b6" : "" ,
+                        borderBottom:"2px solid #2a2e34"
+                    }}
 
                         // Potentially use onmouseover for propogation of event
-                        onMouseEnter={()=>{
-                            setBackgroundColor(props.selectedItem == props.index ? "#b0b2b6" : "#2c2e32")
-                        }}
-                        onMouseLeave={()=>{
-                            setBackgroundColor(props.selectedItem == props.index ? "#b0b2b6" : (props.index%2==0) ? "#212529":"#282a2e")
-                        }}
                         onClick={()=>{
                             setItemDetails(currItem)
                             // setBackgroundColor("#b0b2b6")
-                            props.setSelectedItem(props.index)
+                            props.setSelected(props.index)
                         }}
                         
                         >
@@ -62,7 +58,6 @@ export const Item = (props) => {
                             onClick={()=> {
                                 setItemDetails(currItem)
                                 enableShowDetailsBtn(true)
-                                setBackgroundColor("#b0b2b6")
                             }}
                             
                             >{currItem.title.length > 35 ? currItem.title.slice(0,35) + " ..." : currItem.title}

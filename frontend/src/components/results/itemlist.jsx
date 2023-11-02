@@ -2,14 +2,14 @@ import { useContext, useState } from "react"
 import { AppContext } from "../../utils/context"
 import { Item } from "./item"
 import { Pagination } from "../extras/pagination"
-// import { NoResults } from "../extras/noresults"
 
 export const ItemList = ()=>{
 
     const context = useContext(AppContext)
     const items = context.search.results ? context.search.results : []
+    const [selected,setSelected] = useState(0)
+    console.log(selected)
     const [currentPage,setCurrentPage] = useState(0)
-    // console.log(items)
     const paginatedItems = items.map((item,index) => {
             const itemDetails = {
                 id: item.itemId[0], 
@@ -28,8 +28,11 @@ export const ItemList = ()=>{
                 <>
                     <Item 
                         key={String(item.itemId[0])}
+                        id = {item.itemId[0]}
                         index = {index+1}
                         item = {itemDetails}
+                        selected={selected}
+                        setSelected={setSelected}
                     />
                 </>
             )
