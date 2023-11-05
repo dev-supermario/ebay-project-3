@@ -51,6 +51,16 @@ export default function Form({ setSearched,setResultsWishListBtn }){
         return true
     }
 
+    const checkSearchDisabled = () => {
+        if(keyword.length==0) return true
+        if(!currentLocationOrManual){
+            if(isNaN(zipcodeText)) return true
+            if(zipcodeText.length!=5) return true
+            if(zipcodeInput.length!=5) return true
+        }
+        return false
+    }
+
 
 
     return(
@@ -161,7 +171,7 @@ export default function Form({ setSearched,setResultsWishListBtn }){
                 />
                 <ButtonGroup 
                     handleClearClick={handleClearClick}
-                    searchDisabled = {keyword==""}
+                    searchDisabled = {checkSearchDisabled()}
                     setSearched={setSearched}
                     validateForm={validateForm}
                     handleSearch={handleSearch(

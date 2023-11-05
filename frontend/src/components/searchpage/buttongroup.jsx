@@ -7,6 +7,7 @@ import { AppContext } from '../../utils/context';
 export default function ButtonGroup(props){
 
     const context = useContext(AppContext)
+    // console.log(props.searchDisabled)
 
     return(
         <>
@@ -30,7 +31,7 @@ export default function ButtonGroup(props){
                 <button className="btn btn-light ms-35"
                     type="button"
                     onClick={()=>{
-                        console.log("click")
+                        // console.log("click")
                         props.handleClearClick()
                         context.search.setResults([])
                         props.setSearched("NO")

@@ -21,12 +21,13 @@ export const LocationGroup = (props) => {
             props.setSelected(false)
         }
         if(!props.currentLocationOrManual && !props.selected){
-            console.log("get zip")
+            // console.log("get zip")
             getZipcodes(props.zipcodeInput)
             .then((res) => res.json())
             .then(res => setZipcodes(res))
         }
     },[props.zipcodeInput])
+
 
     const fetchLocation = useCallback(async () => {
         if(currentLocationRef.current.checked){
@@ -73,15 +74,30 @@ export const LocationGroup = (props) => {
                         />
                         <label className="form-check-label ms-5" >Other. Please specify zip code:</label>
                     </div>
-                    <input className="form-control mt-10"
-                        type="text" 
-                        disabled={props.currentLocationOrManual} 
-                        value={props.zipcodeInput}
-                        onChange={(e)=>{
-                            props.setZipcodeText(e.target.value)
-                            props.setZipcodeInput(e.target.value)
-                        }}
-                    />
+                    <div>
+                        <input className="form-control mt-10"
+                            type="text"
+                            maxLength="5" 
+                            pattern="/^(\d{5})?$/"
+                            disabled={props.currentLocationOrManual} 
+                            value={props.zipcodeInput}
+                            required
+                            style={{
+                                border : (!props.currentLocationOrManual && props.zipcodeInput.length==0 ? "2px solid #60232c" : "")
+                                // border: "2px solid red"
+                            }}
+                            onChange={(e)=>{
+                                props.setZipcodeText(e.target.value)
+                                props.setZipcodeInput(e.target.value)
+                            }}
+                        />
+                        {
+                            !props.currentLocationOrManual && props.zipcodeInput.length==0 ?
+                            <p style={{position:"absolute",fontSize:"12px",color:"#8c3f46"}}>Please enter a zip code.</p>
+                            :
+                            <></>
+                        }
+                    </div>
                     {
                         zipcodes.length > 0 && props.zipcodeInput?
                         <>

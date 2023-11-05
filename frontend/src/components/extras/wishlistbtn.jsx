@@ -36,7 +36,8 @@ export const WishListBtn = (props) => {
             <button 
                 type='button' 
                 className='btn p-0'
-                onClick={async ()=>{
+                onClick={async (e)=>{
+                    e.stopPropagation()
                     if(!addedToCart){
                         const {id,...rest} = props.item
                         await setFavourites([...favourites,{_id:id,...rest}])

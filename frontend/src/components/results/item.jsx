@@ -14,7 +14,7 @@ export const Item = (props) => {
     const data = context.item.results.data
     const enableShowDetailsBtn = context.enableShow
 
-    console.log(data)
+    // console.log(data)
 
     const [currItem,setCurrItem] = useState(null)
 
@@ -41,12 +41,13 @@ export const Item = (props) => {
                                 minWidth:"100%",
                                 width: "fit-content",
                                 borderBottom:"2px solid #2a2e34",
-                                backgroundColor : (props.selected == props.index || data.id == props.id ? "#b0b2b6" : "")
+                                backgroundColor : (props.selected == props.index || (data ? data.id == props.id : false) ? "#b0b2b6" : "")
 
                             }}
 
-                            onClick={()=>{
-                                console.log("click")
+                            onClick={(e)=>{
+                                e.stopPropagation()
+                                // console.log("click")
                                 setItemDetails(currItem)
                                 props.setSelected(props.index)
                             }}

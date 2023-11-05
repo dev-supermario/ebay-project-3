@@ -8,7 +8,6 @@ export const ItemList = ()=>{
     const context = useContext(AppContext)
     const items = context.search.results ? context.search.results : []
     const [selected,setSelected] = useState(0)
-    console.log(selected)
     const [currentPage,setCurrentPage] = useState(0)
     const paginatedItems = items.map((item,index) => {
             const itemDetails = {

@@ -89,3 +89,11 @@
 .item:hover, .favourite:hover {
   background-color: #2c2e32;
 }
+
+.masonry-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: masonry;
+  row-gap: 10px;
+  column-gap: 10px;
+}

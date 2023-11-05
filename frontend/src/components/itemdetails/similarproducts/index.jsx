@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useRequest } from "../../../utils/requests"
 import { Product } from "./product"
 import { Tabs } from "./tabs"
+import { NoResults } from "../../extras/noresults"
 
 export const SimilarProducts = ({ id }) => {
 
@@ -37,49 +38,58 @@ export const SimilarProducts = ({ id }) => {
 
     return(
         <>
-            <div className="py-10">
-                <Tabs  
-                    sortBy={sortBy}
-                    setSortBy={setSortBy}
-                    sortOrder={sortOrder}
-                    setSortOrder={setSortOrder}
-                />
-                <div className="w-100 text-white ">
-                    {
-                        products ?
-                        paginatedProducts.slice(0,(products.length > 5 ? 5 : products.length))
-                        :
-                        <>
-                        
-                        </>
-                    }
-                    {
-                        products.length > 5 && showMore ?
-                        paginatedProducts.slice(5,products.length)
-                        :
-                        <>
-                        
-                        </>
-                    }
-                </div>
-                {
-                    products ?
-                    <div className="mt-10">
-                    {
-                        !showMore ?
-                        <button className="btn text-white" onClick={()=>setShowMore(true)}  style={{
-                            backgroundColor: "#212529"
-                        }} >Show More</button>
-                        :
-                        <button className="btn text-white" onClick={()=>setShowMore(false)}  style={{
-                            backgroundColor: "#212529"
-                        }}>Show Less</button>
-                    }
+            {
+                products ?
+                <>
+                    <div className="py-10">
+                        <Tabs  
+                            sortBy={sortBy}
+                            setSortBy={setSortBy}
+                            sortOrder={sortOrder}
+                            setSortOrder={setSortOrder}
+                        />
+                        <div className="w-100 text-white ">
+                            {
+                                products ?
+                                paginatedProducts.slice(0,(products.length > 5 ? 5 : products.length))
+                                :
+                                <>
+                                
+                                </>
+                            }
+                            {
+                                products.length > 5 && showMore ?
+                                paginatedProducts.slice(5,products.length)
+                                :
+                                <>
+                                
+                                </>
+                            }
+                        </div>
+                        {
+                            products ?
+                            <div className="mt-10">
+                            {
+                                !showMore ?
+                                <button className="btn text-white" onClick={()=>setShowMore(true)}  style={{
+                                    backgroundColor: "#212529"
+                                }} >Show More</button>
+                                :
+                                <button className="btn text-white" onClick={()=>setShowMore(false)}  style={{
+                                    backgroundColor: "#212529"
+                                }}>Show Less</button>
+                            }
+                            </div>
+                            :
+                            <></>
+                        }
                     </div>
-                    :
-                    <></>
-                }
-            </div>
+                </>
+                :
+                <>
+                    <NoResults/>
+                </>
+            }
         </>
     )
 }

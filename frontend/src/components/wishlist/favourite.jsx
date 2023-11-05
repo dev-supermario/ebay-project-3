@@ -11,8 +11,8 @@ export const Item = (props) => {
     const data = context.item.favourite.data
     const enableShowDetailsBtn = context.enableShow
 
-    console.log(props.id)
-    console.log(data)
+    // console.log(props.id)
+    // console.log(data)
 
     const [currItem,setCurrItem] = useState(null)
 
@@ -32,14 +32,13 @@ export const Item = (props) => {
                     <div className="d-flex py-15 favourite" data-type={(props.index%2==0) ? "even" : "odd"} style={{
                         minWidth:"100%",
                         width: "fit-content",
-                        backgroundColor: (props.selected == props.index || data["_id"] == props.id) ? "#b0b2b6" : "" ,
+                        backgroundColor: (props.selected == props.index || (data ? data["_id"] == props.id : false)) ? "#b0b2b6" : "" ,
                         borderBottom:"2px solid #2a2e34"
                     }}
 
                         // Potentially use onmouseover for propogation of event
                         onClick={()=>{
                             setItemDetails(currItem)
-                            // setBackgroundColor("#b0b2b6")
                             props.setSelected(props.index)
                         }}
                         

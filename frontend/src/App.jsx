@@ -31,7 +31,7 @@ export default function App(){
     const [resultDetails,setResultDetails] = useState(null)
 
     useEffect(()=>{
-        console.log("fetching")
+        // console.log("fetching")
         getAllFavourites()
         .then(res => {
             // console.log(res)

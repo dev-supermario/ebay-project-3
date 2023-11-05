@@ -16,11 +16,13 @@ export const ButtonGroup = ({ item,setShowDetails }) => {
                         className="btn btn-light p-0" 
                         type="button"
                         onClick={()=>{
-                            console.log("click")
+                            // console.log("click")
                             window.FB.ui({
                                 method: 'share',
                                 href: item.itemURL,
-                              }, ()=>{console.log("shared")});
+                              }, ()=>{
+                                // console.log("shared")
+                            });
                         }}
 
                     ><img className="img-fluid" style={{width:"40px"}} src={FacebookIcon} /></button>

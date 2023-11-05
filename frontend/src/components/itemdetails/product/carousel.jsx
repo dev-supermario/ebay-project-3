@@ -8,8 +8,8 @@ import { useState } from 'react';
 function CustomCarousel({ URLs,setCarouselView }) {
 
     const [itemIndex,setItemIndex] = useState(0)
-    console.log(itemIndex)
-    console.log(URLs.length)
+    // console.log(itemIndex)
+    // console.log(URLs.length)
 
     return (
         <div 
@@ -63,6 +63,7 @@ function CustomCarousel({ URLs,setCarouselView }) {
                                             maxHeight: "100%",
                                             top: "50%",
                                             // left: "50%",
+                                            border:"12px solid rgba(33,37,41)",
                                             transform:"translateX(-50%) translateY(-50%)"
                                         }}  
                                         className='img-fluid' src={url} />

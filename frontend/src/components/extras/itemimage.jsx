@@ -1,8 +1,6 @@
-import {  useState } from "react"
 
 export const ItemImage = (props) => {
 
-    const [popup,setPopup] = useState(false)
 
     return (
         <>
@@ -13,36 +11,7 @@ export const ItemImage = (props) => {
                 }}
                 
             >
-                <img 
-                    src={props.imageURL} 
-                    className="" 
-                    style={{
-                        minWidth:"120px",minHeight:"120px",
-                        maxWidth:"120px" , maxHeight:"120px"
-                    }}
-                    onClick={()=>{
-                       setPopup(true)
-                    } }    
-                />
-            </div>
-            {
-                popup ?
-                <div
-                    style={{
-                        top:"0",
-                        left:"0",
-                        width:"100vw",
-                        height:"100vh",
-                        position:"fixed",
-                        display:"flex",
-                        justifyContent:"center",
-                        alignItems:"center",
-                        backgroundColor:"#0f0f0f",
-                    }}
-                    onClick={()=>{
-                        setPopup(false)
-                    }}
-                >
+                <a href={props.imageURL} target="_blank" rel="noreferrer">
                     <img 
                         src={props.imageURL} 
                         className="" 
@@ -51,11 +20,8 @@ export const ItemImage = (props) => {
                             maxWidth:"160px" , maxHeight:"160px"
                         }}
                     />
-
-                </div>
-                :
-                <></>
-            }
+                </a>
+            </div>
         </>
     )
 }

@@ -7,7 +7,7 @@ import { FeedbackRatingStar } from "./feedbackrating";
 export const Seller = ({ item,itemURL }) => {
     const sellerInfo = item.sellerInfo
     const storeInfo = item.storeInfo
-    console.log(sellerInfo)
+    // console.log(sellerInfo)
     return(
         <>
             <div className="w-100 text-white">

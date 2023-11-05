@@ -58,7 +58,7 @@ export const useRequest = () => {
     };
   
   const addToFavourites = async (params) => {
-    console.log("added to favourites")
+    // console.log("added to favourites")
     // let URL = "http://localhost:3001/favourites/add?"
     let URL = "https://csci571-hw3-403803.wl.r.appspot.com/favourites/add?"
     const config = {
@@ -85,14 +85,12 @@ export const useRequest = () => {
   }
   
   const removeFromFavourites = async (params) => {
-    console.log(params)
-    console.log("removed from favourites")
+    // console.log("removed from favourites")
     // let URL = "http://localhost:3001/favourites/remove?"
     let URL = "https://csci571-hw3-403803.wl.r.appspot.com/favourites/remove?"
 
 
     let id = params.id ? params.id : params["_id"]
-    console.log(id)
 
     URL += `id=${id}`
   
@@ -112,7 +110,7 @@ export const useRequest = () => {
 
   const getPhotos = async (params) => {
 
-    console.log("get photos")
+    // console.log("get photos")
     // let URL = "http://localhost:3001/utils/getPhotos"
     let URL = "https://csci571-hw3-403803.wl.r.appspot.com/utils/getPhotos"
     if(params.keyword) URL += `?keyword=${params.keyword}`
@@ -152,7 +150,6 @@ export const useRequest = () => {
 
   const getZipcodes = async (keyword) => {
 
-    console.log(keyword)
     // let URL = "http://localhost:3001/utils/getZipcodes?"
     let URL = "https://csci571-hw3-403803.wl.r.appspot.com/utils/getZipcodes?"
 
