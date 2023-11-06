@@ -36,8 +36,10 @@ export const FavouritesList = ()=>{
             favourites.length!=0 ?
             <>
                 <div className="bg-dark text-white w-100 overflow-auto text-nowrap">
-                    <div key={"0"} className="d-flex fw-bold pt-10 w-100" style={{
-                        borderBottom:"2px solid #2a2e34"
+                    <div key={0} className="d-flex fw-bold pt-10 pe-10" style={{
+                        borderBottom:"2px solid #2a2e34",
+                        width: "fit-content",
+                        minWidth:"100%"
                     }}>
                         <p className="text-center ps-sm-20 pe-sm-60" style={{
                             minWidth:"40px",
