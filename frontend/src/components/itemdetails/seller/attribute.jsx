@@ -1,10 +1,10 @@
 
-export const Attribute = ({ name,value }) => {
+export const Attribute = ({ name,value,bgColor }) => {
 
     return (
         <>
             <div className="d-flex flex-column flex-sm-row" style={{
-                    backgroundColor:"#282a2e"
+                    backgroundColor:bgColor
                 }}>
                 <div 
                     className="text-start ps-10 py-10 fw-bold"

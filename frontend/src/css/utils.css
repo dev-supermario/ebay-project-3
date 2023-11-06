@@ -81,7 +81,6 @@
 .item[data-type="odd"],.favourite[data-type="odd"]{
   background-color: #282a2e;
 }
-
 .item[data-type="even"],.favourite[data-type="even"]{
   background-color: #212529;
 }

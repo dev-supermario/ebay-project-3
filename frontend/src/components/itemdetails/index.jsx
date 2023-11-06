@@ -16,6 +16,7 @@ export const ItemDetails = ({ itemType ,setShowDetails }) => {
     const favItem = context.item.favourite.data ? context.item.favourite.data : null
     const item = itemType ? resultsItem : favItem 
     const [selected,setSelected] = useState("Product")
+    // console.log(item)
 
 
     return(
@@ -54,7 +55,7 @@ export const ItemDetails = ({ itemType ,setShowDetails }) => {
                         {
                             selected=="Seller" ?
                             <>
-                                <Seller item = {item} itemURL = {item.itemURL} />
+                                <Seller item = {item} />
                             </>
                             :
                             <></>

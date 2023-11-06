@@ -27,7 +27,6 @@ export const Item = (props) => {
                 location: res.Location,
                 returnPolicy : res.ReturnPolicy ? res.ReturnPolicy : "",
                 itemSpecifics : res.ItemSpecifics.NameValueList,
-                storeInfo : res.Storefront ? res.Storefront : ""
             })
         })
     },[props.selected])

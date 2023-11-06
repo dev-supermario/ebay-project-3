@@ -43,7 +43,7 @@ export const FavouritesList = ()=>{
                             minWidth:"40px",
                             maxWidth:"40px"
                         }}>#</p>
-                        <p className="me-20 me-sm-60" style={{
+                        <p className="me-60 me-sm-100" style={{
                                 minWidth:"120px",
                             }}
                         >Image</p>
@@ -57,8 +57,8 @@ export const FavouritesList = ()=>{
                     {   
                         paginatedFavourites.splice(currentPage*10,currentPage*10+10)    
                     }
-                    <div key={`${favourites.length+1}`} className="d-flex pt-10 w-100 ps-670">
-                        <p className="text-wrap me-30 me-sm-80 ms-sm-270" style={{minWidth:"100px",maxWidth:"100px"}}>Total Shopping</p>
+                    <div key={`${favourites.length+1}`} className="d-flex pt-10 w-100 ps-700">
+                        <p className="me-30 me-sm-80 ms-sm-270 fw-bold" style={{minWidth:"100px",maxWidth:"100px"}}>Total Shopping</p>
                         <p className="ps-10 ms-sm-30">${totalPrice.toFixed(2)}</p>
                     </div>
                 </div>

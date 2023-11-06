@@ -18,7 +18,7 @@ export default function ButtonGroup(props){
                     onClick={async ()=>{
                         const data = await props.handleSearch()
                         // console.log(data)
-                        if(props.validateForm()){
+                        if(props.validateForm() && Object.keys(data).length != 0){
                             props.setSearched("PENDING")
                             setTimeout(()=>{
                                 context.search.setResults(data.item)

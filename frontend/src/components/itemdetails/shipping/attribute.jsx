@@ -4,7 +4,7 @@ export const Attribute = ({ name,value }) => {
     return (
         <>
             <div className="d-flex flex-column flex-sm-row" style={{
-                    backgroundColor:"#282a2e"
+                    backgroundColor:"#212529"
                 }}>
                 <div 
                     className="text-start ps-10 py-10 fw-bold"

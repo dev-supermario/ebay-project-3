@@ -21,6 +21,7 @@ export const ItemList = ()=>{
                 shippingInfo: item.shippingInfo[0],
                 returnsAccepted : item.returnsAccepted ? item.returnsAccepted : "",
                 sellerInfo: item.sellerInfo ? item.sellerInfo[0] : "",
+                storeInfo: item.storeInfo ? item.storeInfo[0] : ""
             }
 
             return(
@@ -51,7 +52,7 @@ export const ItemList = ()=>{
                             minWidth:"40px",
                             maxWidth:"40px"
                         }}>#</p>
-                        <p className="me-20 me-sm-60" style={{
+                        <p className="me-60 me-sm-100" style={{
                                 minWidth:"120px",
                             }}
                         >Image</p>

@@ -10,10 +10,25 @@ export const LocationGroup = (props) => {
     const currentLocationRef = useRef(null)
     const [zipcodes,setZipcodes] = useState([])
 
+    const fetchLocation = useCallback(async (IP) => {
+        if(currentLocationRef.current.checked){
+            const URL = `https://api.ipgeolocation.io/ipgeo?apiKey=77371e5d1f4644f1a38b9132c1e2cf11&ip=${IP}`
+            fetch(URL)
+            .then(res => res.json())
+            .then(res => {
+                // console.log(res)
+                props.setZipcodeText(res.zipcode)
+            })
+        }
+    },[IP])
+
     useEffect(() => {
         fetchIp()
-        .then(data => setIP(data.ip))
-        .then(()=>fetchLocation())
+        .then(data => {
+            setIP(data.ip)
+            return data.ip
+        })
+        .then((ip)=>fetchLocation(String(ip)))
     }, [props.currentLocationOrManual]);
 
     useEffect(()=>{
@@ -29,16 +44,7 @@ export const LocationGroup = (props) => {
     },[props.zipcodeInput])
 
 
-    const fetchLocation = useCallback(async () => {
-        if(currentLocationRef.current.checked){
-            const URL = `http://ip-api.com/json/${IP}?fields=zip`
-            fetch(URL)
-            .then(res => res.json())
-            .then(res => {
-                props.setZipcodeText(res.zip)
-            })
-        }
-    },[IP])
+    
 
 
 

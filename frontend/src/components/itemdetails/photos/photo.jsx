@@ -3,7 +3,7 @@ export const Photo = ({ imageURL }) => {
     return(
         <>
             <div 
-                className="col-12 col-sm-4 p-0 text-center h-auto"
+                className="col-sm-4 p-0 text-center h-auto mt-5"
                 style={{
                     minWidth:"320px",
                     // maxWidth:"400px",

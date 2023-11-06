@@ -9,7 +9,7 @@ export const ProductTab = ({ item }) => {
 
     return (
         <>
-            <div className="w-100 text-white">
+            <div className="w-100 text-white mt-10">
 
                 <Attribute index="1" name={"Product Images"} value={
                     <>
@@ -30,9 +30,15 @@ export const ProductTab = ({ item }) => {
                 }
                 <Attribute index="2" name={"Price"} value={`$${item.price}`} />
                 <Attribute index="3" name={"Location"} value={item.location} />
-                <Attribute index="4" name={"Return Policy"} 
-                    value={item.returnPolicy ? (item.returnPolicy.ReturnsAccepted ? item.returnPolicy.ReturnsAccepted: "") + (item.returnPolicy.ReturnsWithin ? "Within " + item.returnPolicy.ReturnsWithin : "") : ""} 
-                />
+                {
+                    item.returnPolicy ?
+                    <Attribute index="4" name={"Return Policy"} 
+                        value={item.returnPolicy ? (item.returnPolicy.ReturnsAccepted ? item.returnPolicy.ReturnsAccepted: "") + (item.returnPolicy.ReturnsWithin ? "Within " + item.returnPolicy.ReturnsWithin : "") : ""} 
+                    />
+                    :
+                    <></>
+                }
+                
                 {
                     itemSpecifics.map((attribute,index) => {
                         return(

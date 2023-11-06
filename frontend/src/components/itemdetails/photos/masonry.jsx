@@ -6,13 +6,16 @@ export const Masonry = ({ URLs }) => {
         <>
             <div className="container">
                 <div 
-                    className="row w-100 pt-10 m-0 gy-10"
-                    // style={{columnGap:"10px"}}
+                    className="d-sm-grid w-100 pt-10 m-0"
+                    style={{
+                        gridTemplateRows : "masonry",
+                        gridTemplateColumns : "auto auto auto",
+                        rowGap : "10px"
+                    }}
                 >
                     {
                         URLs ?
                         URLs.map(url => {
-                            // console.log(url)
                             return(
                                 <>
                                     <Photo key={String(url)} imageURL = {url} />
